@@ -1,7 +1,7 @@
 <?php
 
 namespace App\DataFixtures;
-
+/*
 use App\Entity\Estado;
 use App\Entity\MedioPago;
 use App\Entity\Rol;
@@ -9,10 +9,10 @@ use App\Entity\Usuario;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
-class AppFixtures extends Fixture
+*/
+class AppFixtures //extends Fixture
 {
-    private $encoder;
+    /*private $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
@@ -104,5 +104,5 @@ class AppFixtures extends Fixture
         $manager->persist($estado6);
 
         $manager->flush();
-    }
+    }*/
 }
