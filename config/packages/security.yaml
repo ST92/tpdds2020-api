@@ -1,23 +1,84 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    providers:
-        users_in_memory: { memory: null }
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: true
-            provider: users_in_memory
+  encoders:
+    App\Entity\Usuario:
+      algorithm: bcrypt
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  providers:
+    usuarios:
+      entity:
+        class: App\Entity\Usuario
+    jwt:
+      lexik_jwt:
+        class: App\Entity\Usuario
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+    login:
+      pattern:  ^/api/login
+      stateless: true
+      anonymous: true
+      provider: usuarios
+      json_login:
+        check_path:      /api/login_check
+        username_path:   email
+        password_path:   password
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+    refresh:
+      pattern:  ^/api/token/refresh
+      stateless: true
+      anonymous: true
+
+    api_usuarios_registro:
+      pattern:  ^/api/usuarios/registro
+      stateless: true
+      anonymous: true
+
+    api_usuarios_recuperarclave:
+      pattern:  ^/api/usuarios/recuperarclave
+      stateless: true
+      anonymous: true
+
+    api_usuarios_nuevaclave:
+      pattern:  ^/api/usuarios/nuevaclave
+      stateless: true
+      anonymous: true
+
+    api_usuarios_validaremail:
+      pattern:  ^/api/usuarios/validaremail
+      stateless: true
+      anonymous: true
+
+    api_usuarios_esemailunico:
+      pattern:  ^/api/usuarios/esemailunico
+      stateless: true
+      anonymous: true
+
+    api_contacto:
+      pattern:  ^/api/contactos
+      stateless: true
+      anonymous: true
+
+    api:
+      pattern:   ^/api
+      stateless: true
+      provider: jwt
+      guard:
+        authenticators:
+          - lexik_jwt_authentication.jwt_token_authenticator
+
+  access_control:
+    - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/usuarios/registro, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+    - { path: ^/api/usuarios/recuperarclave, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/usuarios/nuevaclave, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/usuarios/validaremail, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/usuarios/esemailunico, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/contactos, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
