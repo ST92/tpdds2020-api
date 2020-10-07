@@ -24,7 +24,7 @@ class Fixture
     /**
      * @var Competencia
      *
-     * @OneToOne(targetEntity="Competencia", mappedBy="fixtureId")
+     * @ORM\OneToOne(targetEntity="Competencia", mappedBy="fixtureId")
      *
      */
     private $competencia;
