@@ -25,7 +25,6 @@ class CompetenciaType extends AbstractType{
         $deporteTransformer = new EntityToIdObjectTransformer($options['em'], Deporte::class);
         $usuarioTransformer = new EntityToIdObjectTransformer($options['em'], Usuario::class);
         $tipoCompetenciaTransformer = new EntityToIdObjectTransformer($options['em'], TipoCompetencia::class);
-        $estadoCompetenciaTransformer = new EntityToIdObjectTransformer($options['em'], EstadoCompetencia::class);
         $tipoPuntuacionTransformer = new EntityToIdObjectTransformer($options['em'], TipoPuntuacion::class);
 
         //Fecha de baja y estado es interno
@@ -41,12 +40,11 @@ class CompetenciaType extends AbstractType{
             ->add('ptos_presentacion')
             ->add('ptos_ausencia')
             ->add('cantidad_sets')
-            ->add($builder->create('deporte', TextType::class)->addModelTransformer($deporteTransformer))
-            ->add($builder->create('usuario', TextType::class)->addModelTransformer($usuarioTransformer))
-            ->add($builder->create('tipo_competencia', TextType::class)->addModelTransformer($tipoCompetenciaTransformer))
-            ->add($builder->create('estado_competencia', TextType::class)->addModelTransformer($estadoCompetenciaTransformer))
-            ->add($builder->create('tipo_puntuacion', TextType::class)->addModelTransformer($tipoPuntuacionTransformer))
-            ->add('sedes_competencia', CollectionType::class, [
+            ->add($builder->create('deporte_id', TextType::class)->addModelTransformer($deporteTransformer))
+            ->add($builder->create('usuario_id', TextType::class)->addModelTransformer($usuarioTransformer))
+            ->add($builder->create('tipo_competencia_id', TextType::class)->addModelTransformer($tipoCompetenciaTransformer))
+            ->add($builder->create('tipo_puntuacion_id', TextType::class)->addModelTransformer($tipoPuntuacionTransformer))
+            ->add('lista_sedes_competencia', CollectionType::class, [
                 'entry_type' => SedesCompetenciaType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
@@ -63,9 +61,9 @@ class CompetenciaType extends AbstractType{
             'csrf_protection' => false,
             'allow_extra_fields' => true,
             'em' => null,
-            'constraints' => [
+            /*'constraints' => [
                 new Callback([$this, 'validate']),
-            ]
+            ]*/
         ])
             ->setRequired('em');
     }

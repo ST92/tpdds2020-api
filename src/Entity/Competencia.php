@@ -47,28 +47,28 @@ class Competencia
     /**
      * @var boolean
      *
-     * @ORM\Column(name="permite_empate", type="boolean", nullable=false)
+     * @ORM\Column(name="permite_empate", type="boolean", nullable=true)
      */
     private $permiteEmpate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="ptos_ganado", type="integer", nullable=false)
+     * @ORM\Column(name="ptos_ganado", type="integer", nullable=true)
      */
     private $ptosGanado;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="ptos_empate", type="integer", nullable=false)
+     * @ORM\Column(name="ptos_empate", type="integer", nullable=true)
      */
     private $ptosEmpate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="ptos_presentacion", type="integer", nullable=false)
+     * @ORM\Column(name="ptos_presentacion", type="integer", nullable=true)
      */
     private $ptosPresentacion;
 
@@ -182,7 +182,7 @@ class Competencia
     /**
      * @return EstadoCompetencia
      */
-    public function getEstadoCompetenciaId(): EstadoCompetencia
+    public function getEstadoCompetenciaId()
     {
         return $this->estadoCompetenciaId;
     }
@@ -190,9 +190,265 @@ class Competencia
     /**
      * @param EstadoCompetencia $estadoCompetenciaId
      */
-    public function setEstadoCompetenciaId(EstadoCompetencia $estadoCompetenciaId): void
+    public function setEstadoCompetenciaId(EstadoCompetencia $estadoCompetenciaId)
     {
         $this->estadoCompetenciaId = $estadoCompetenciaId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * @param string $nombre
+     */
+    public function setNombre(string $nombre)
+    {
+        $this->nombre = $nombre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReglamento()
+    {
+        return $this->reglamento;
+    }
+
+    /**
+     * @param string $reglamento
+     */
+    public function setReglamento(string $reglamento)
+    {
+        $this->reglamento = $reglamento;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPermiteEmpate()
+    {
+        return $this->permiteEmpate;
+    }
+
+    /**
+     * @param bool $permiteEmpate
+     */
+    public function setPermiteEmpate(bool $permiteEmpate)
+    {
+        $this->permiteEmpate = $permiteEmpate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPtosGanado()
+    {
+        return $this->ptosGanado;
+    }
+
+    /**
+     * @param int $ptosGanado
+     */
+    public function setPtosGanado(int $ptosGanado)
+    {
+        $this->ptosGanado = $ptosGanado;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPtosEmpate()
+    {
+        return $this->ptosEmpate;
+    }
+
+    /**
+     * @param int $ptosEmpate
+     */
+    public function setPtosEmpate(int $ptosEmpate)
+    {
+        $this->ptosEmpate = $ptosEmpate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPtosPresentacion()
+    {
+        return $this->ptosPresentacion;
+    }
+
+    /**
+     * @param int $ptosPresentacion
+     */
+    public function setPtosPresentacion(int $ptosPresentacion)
+    {
+        $this->ptosPresentacion = $ptosPresentacion;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPtosAusencia()
+    {
+        return $this->ptosAusencia;
+    }
+
+    /**
+     * @param int $ptosAusencia
+     */
+    public function setPtosAusencia(int $ptosAusencia)
+    {
+        $this->ptosAusencia = $ptosAusencia;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCantidadSets()
+    {
+        return $this->cantidadSets;
+    }
+
+    /**
+     * @param int $cantidadSets
+     */
+    public function setCantidadSets(int $cantidadSets)
+    {
+        $this->cantidadSets = $cantidadSets;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getFechaBaja()
+    {
+        return $this->fechaBaja;
+    }
+
+    /**
+     * @param DateTime $fechaBaja
+     */
+    public function setFechaBaja(DateTime $fechaBaja)
+    {
+        $this->fechaBaja = $fechaBaja;
+    }
+
+    /**
+     * @return TipoCompetencia
+     */
+    public function getTipoCompetenciaId()
+    {
+        return $this->tipoCompetenciaId;
+    }
+
+    /**
+     * @param TipoCompetencia $tipoCompetenciaId
+     */
+    public function setTipoCompetenciaId(TipoCompetencia $tipoCompetenciaId)
+    {
+        $this->tipoCompetenciaId = $tipoCompetenciaId;
+    }
+
+    /**
+     * @return Deporte
+     */
+    public function getDeporteId()
+    {
+        return $this->deporteId;
+    }
+
+    /**
+     * @param Deporte $deporteId
+     */
+    public function setDeporteId(Deporte $deporteId)
+    {
+        $this->deporteId = $deporteId;
+    }
+
+    /**
+     * @return TipoPuntuacion
+     */
+    public function getTipoPuntuacionId()
+    {
+        return $this->tipoPuntuacionId;
+    }
+
+    /**
+     * @param TipoPuntuacion $tipoPuntuacionId
+     */
+    public function setTipoPuntuacionId(TipoPuntuacion $tipoPuntuacionId)
+    {
+        $this->tipoPuntuacionId = $tipoPuntuacionId;
+    }
+
+    /**
+     * @return Fixture
+     */
+    public function getFixtureId()
+    {
+        return $this->fixtureId;
+    }
+
+    /**
+     * @param Fixture $fixtureId
+     */
+    public function setFixtureId(Fixture $fixtureId)
+    {
+        $this->fixtureId = $fixtureId;
+    }
+
+    /**
+     * @return Usuario
+     */
+    public function getUsuarioId()
+    {
+        return $this->usuarioId;
+    }
+
+    /**
+     * @param Usuario $usuarioId
+     */
+    public function setUsuarioId(Usuario $usuarioId)
+    {
+        $this->usuarioId = $usuarioId;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getListaSedesCompetencia()
+    {
+        return $this->listaSedesCompetencia;
+    }
+
+    /**
+     * @param $listaSedesCompetencia
+     */
+    public function setListaSedesCompetencia($listaSedesCompetencia)
+    {
+        $this->listaSedesCompetencia = $listaSedesCompetencia;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getListaParticipantes()
+    {
+        return $this->listaParticipantes;
+    }
+
+    /**
+     * @param ArrayCollection $listaParticipantes
+     */
+    public function setListaParticipantes(ArrayCollection $listaParticipantes)
+    {
+        $this->listaParticipantes = $listaParticipantes;
     }
 
 

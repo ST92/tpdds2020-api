@@ -26,7 +26,7 @@ class SedesCompetenciaType extends AbstractType{
 
         $builder
             ->add('disponibilidad')
-            ->add($builder->create('sedes', TextType::class)->addModelTransformer($sedesTransformer));
+            ->add($builder->create('sedes_id', TextType::class)->addModelTransformer($sedesTransformer));
     }
 
     public function configureOptions(OptionsResolver $resolver)

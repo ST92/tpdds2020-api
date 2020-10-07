@@ -48,7 +48,56 @@ class SedesCompetencia
      */
     private $sedesId;
 
+    /**
+     * @return int
+     */
+    public function getDisponibilidad()
+    {
+        return $this->disponibilidad;
+    }
+
+    /**
+     * @param int $disponibilidad
+     */
+    public function setDisponibilidad(int $disponibilidad)
+    {
+        $this->disponibilidad = $disponibilidad;
+    }
+
+    /**
+     * @return Competencia
+     */
+    public function getCompetenciaId()
+    {
+        return $this->competenciaId;
+    }
+
+    /**
+     * @param Competencia $competenciaId
+     */
+    public function setCompetenciaId(Competencia $competenciaId)
+    {
+        $this->competenciaId = $competenciaId;
+    }
+
+    /**
+     * @return Sedes
+     */
+    public function getSedesId()
+    {
+        return $this->sedesId;
+    }
+
+    /**
+     * @param Sedes $sedesId
+     */
+    public function setSedesId(Sedes $sedesId)
+    {
+        $this->sedesId = $sedesId;
+    }
+
     //TODO Consultar: es una relación bidireccional con sedes?
+
 
 
 }
