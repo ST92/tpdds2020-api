@@ -1,0 +1,11 @@
+# Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
+fos_rest:
+  routing_loader:
+    default_format: json
+    include_format: false
+  param_fetcher_listener: force
+  body_listener: true
+  body_converter:
+    enabled: true
+  view:
+    view_response_listener: true

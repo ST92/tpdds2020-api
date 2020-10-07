@@ -21,14 +21,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * @RouteResource("Competencias", pluralize=false)
  */
-class CompetenciaController extends FOSRestController{
+class CompetenciaController extends FOSRestController
+{
 
     /**
      * Crear nueva competencia
      *
      * @param Request $request
      * @return FormInterface|Competencia
-     * @View(serializerEnableMaxDepthChecks=true)
+     * @View()
      * @throws
      */
     public function postAction(Request $request){
