@@ -20,6 +20,12 @@ class CompetenciaRepository extends ServiceEntityRepository {
         parent::__construct($registry, Competencia::class);
     }
 
+    public function persistAndFlush($competencia){
+        $em = $this->getEntityManager();
+        $em->persist($competencia);
+        $em->flush();
+    }
+
 
 
 

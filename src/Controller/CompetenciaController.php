@@ -13,12 +13,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use function GuzzleHttp\Psr7\copy_to_string;
-use function MongoDB\BSON\toJSON;
+
 
 /**
  * @RouteResource("Competencias", pluralize=false)
@@ -41,6 +36,8 @@ class CompetenciaController extends FOSRestController
 
         $competencia = new Competencia();
 
+        $competenciaRepository = $em->getRepository(Competencia::class);
+
         $competencia->setEstadoCompetenciaId($em->getReference(EstadoCompetencia::class,1));
 
         $objForm = $this->createForm(CompetenciaType::class, $competencia, ['em' => $em]);
@@ -51,8 +48,8 @@ class CompetenciaController extends FOSRestController
             foreach ($competencia->getListaSedesCompetencia() as $sedes_competencia){
                 $sedes_competencia->setCompetenciaId($competencia);
             }
-            $em->persist($competencia);
-            $em->flush();
+
+            $competenciaRepository->persistAndFlush($competencia);
 
             return $competencia;
         }
