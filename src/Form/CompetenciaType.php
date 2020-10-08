@@ -100,21 +100,21 @@ class CompetenciaType extends AbstractType{
     public function validate(array $data, ExecutionContextInterface $context): void
     {
         //TODO Ver como se enviará tipo_puntuacion desde el front end.
-        if ($data['tipo_puntuacion']== 1 && $data['cantidad_sets']%2 ==1 || $data['cantidad_sets'] > 10) {
+        if ($data['tipo_puntuacion_id']== 1 && $data['cantidad_sets']%2 ==1 || $data['cantidad_sets'] > 10) {
             $context->buildViolation('Cantidad de Sets debe ser un número impar y menor a 10')
                 ->atPath('cantidad_sets')
                 ->addViolation();
         }
 
-        if ($data['tipo_competencia'] == 1 && $data['ptos_ganado']< $data['ptos_empate']) {
+        if ($data['tipo_competencia_id'] == 1 && $data['ptos_empate']>=$data['ptos_ganado']) {
             $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Empate')
-                ->atPath('ptos_ganado')
+                ->atPath('ptos_empate')
                 ->addViolation();
         }
 
-        if ($data['tipo_puntuacion']== 1 && $data['ptos_presentacion'] >= $data['ptos_ganado']){
-            $context->buildViolation('Puntos por Presentarse debe ser menor que Puntos por Partido Ganado')
-                ->atPath('cantidad_sets')
+        if ($data['tipo_competencia_id']== 1 && $data['ptos_presentacion'] >= $data['ptos_ganado']){
+            $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Presentarse')
+                ->atPath('ptos_presentacion')
                 ->addViolation();
         }
 
