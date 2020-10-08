@@ -8,8 +8,8 @@ parameters:
 doctrine:
     dbal:
         # configure these for your database server
-        driver: 'pdo_mysql'
-        server_version: 'mariadb-10.2.12'
+        driver: 'mysql'
+        server_version: '5.7'
         charset: utf8mb4
         default_table_options:
             charset: utf8mb4

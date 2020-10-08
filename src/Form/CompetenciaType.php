@@ -9,6 +9,7 @@ use App\Entity\EstadoCompetencia;
 use App\Entity\TipoCompetencia;
 use App\Entity\TipoPuntuacion;
 use App\Entity\Usuario;
+use App\Utils\Form\DataTransformer\ObjectToIdTransformer;
 use FOS\RestBundle\Form\Transformer\EntityToIdObjectTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -22,10 +23,10 @@ class CompetenciaType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options){
 
-        $deporteTransformer = new EntityToIdObjectTransformer($options['em'], Deporte::class);
-        $usuarioTransformer = new EntityToIdObjectTransformer($options['em'], Usuario::class);
-        $tipoCompetenciaTransformer = new EntityToIdObjectTransformer($options['em'], TipoCompetencia::class);
-        $tipoPuntuacionTransformer = new EntityToIdObjectTransformer($options['em'], TipoPuntuacion::class);
+        $deporteTransformer = new ObjectToIdTransformer($options['em'], Deporte::class);
+        $usuarioTransformer = new ObjectToIdTransformer($options['em'], Usuario::class);
+        $tipoCompetenciaTransformer = new ObjectToIdTransformer($options['em'], TipoCompetencia::class);
+        $tipoPuntuacionTransformer = new ObjectToIdTransformer($options['em'], TipoPuntuacion::class);
 
         //Fecha de baja y estado es interno
         //TODO Falta agregar las validaciones en puntos, y sobre nombre.

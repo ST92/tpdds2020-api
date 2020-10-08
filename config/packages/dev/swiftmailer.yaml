@@ -1,5 +1,5 @@
 # See https://symfony.com/doc/current/email/dev_environment.html
-swiftmailer:
+#swiftmailer:
     # send all emails to a specific address
     # delivery_addresses: ['lgallego@amsolucionesweb.com.ar']
-    delivery_addresses: ['%env(DELIVERY_ADDRESS)%']
+ #   delivery_addresses: ['%env(DELIVERY_ADDRESS)%']

@@ -47,14 +47,19 @@ class Sedes
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="fecha_borrado", type="date", nullable=false)
+     * @ORM\Column(name="fecha_borrado",type="date", nullable=true)
      */
     private $fechaBorrado;
 
     /**
-     * @var int
+     * @var Usuario
      *
      * @ORM\Column(name="usuario_id", type="integer", nullable=false)
+     *
+     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy= "listaSedes", cascade={"persist", "remove"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $usuarioId;
 

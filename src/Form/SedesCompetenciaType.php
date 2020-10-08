@@ -11,6 +11,7 @@ use App\Entity\SedesCompetencia;
 use App\Entity\TipoCompetencia;
 use App\Entity\TipoPuntuacion;
 use App\Entity\Usuario;
+use App\Utils\Form\DataTransformer\ObjectToIdTransformer;
 use FOS\RestBundle\Form\Transformer\EntityToIdObjectTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -22,7 +23,7 @@ class SedesCompetenciaType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options){
 
-        $sedesTransformer = new EntityToIdObjectTransformer($options['em'], Sedes::class);
+        $sedesTransformer = new ObjectToIdTransformer($options['em'], Sedes::class);
 
         $builder
             ->add('disponibilidad')

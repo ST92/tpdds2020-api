@@ -46,6 +46,9 @@ class CompetenciaController extends FOSRestController
 
         if ($objForm->isSubmitted() && $objForm->isValid()) {
 
+            foreach ($competencia->getListaSedesCompetencia() as $sedes_competencia){
+                $sedes_competencia->setCompetenciaId($competencia);
+            }
             $em->persist($competencia);
             $em->flush();
 

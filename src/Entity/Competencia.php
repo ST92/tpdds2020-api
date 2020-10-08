@@ -28,7 +28,7 @@ class Competencia
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $id=0;
 
     /**
      * @var string
@@ -450,6 +450,15 @@ class Competencia
     {
         $this->listaParticipantes = $listaParticipantes;
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 
 
 

@@ -36,17 +36,17 @@ services:
         tags:
         - { name: form.type, alias: json_collection_entity }
 
-    app.event.listener.extended_view_response:
-        class: App\EventListener\ExtendedViewResponseListener
-        arguments: ["@security.token_storage"]
-        tags:
-            - { name: kernel.event_listener, event: kernel.view, method: onKernelView, priority: 101 }
+    #app.event.listener.extended_view_response:
+     #   class: App\EventListener\ExtendedViewResponseListener
+     #   arguments: ["@security.token_storage"]
+     #   tags:
+      #      - { name: kernel.event_listener, event: kernel.view, method: onKernelView, priority: 101 }
 
     jms_serializer.naming_strategy:
         class: 'JMS\Serializer\Naming\IdenticalPropertyNamingStrategy'
 
-    acme_api.event.authentication_success_listener:
-        class: App\EventListener\AuthenticationSuccessListener
-        arguments: ["@request_stack"]
-        tags:
-            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+  #  acme_api.event.authentication_success_listener:
+   #     class: App\EventListener\AuthenticationSuccessListener
+    #    arguments: ["@request_stack"]
+     #   tags:
+      #      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }

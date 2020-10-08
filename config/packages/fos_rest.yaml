@@ -9,3 +9,5 @@ fos_rest:
     enabled: true
   view:
     view_response_listener: true
+  serializer:
+    serialize_null: true
