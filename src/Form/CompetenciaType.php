@@ -62,6 +62,28 @@ class CompetenciaType extends AbstractType{
             'csrf_protection' => false,
             'allow_extra_fields' => true,
             'em' => null,
+            'constraints' =>[
+                new Callback(function(Competencia $data, ExecutionContextInterface $context)
+                {
+                    if ($data->getTipoPuntuacionId()->getId()== 1 && ($data->getCantidadSets()%2 ==1 || $data->getCantidadSets() > 10)) {
+                        $context->buildViolation('Cantidad de Sets debe ser un número impar y menor a 10')
+                            ->atPath('cantidad_sets')
+                            ->addViolation();
+                    }
+
+                    if ($data->getTipoCompetenciaId()->getId() == 1 && $data->getPtosEmpate()>=$data->getPtosGanado()) {
+                        $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Empate')
+                            ->atPath('ptos_empate')
+                            ->addViolation();
+                    }
+
+                    if ($data->getTipoCompetenciaId()->getId()== 1 && $data->getPtosPresentacion() >= $data->getPtosGanado()){
+                        $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Presentarse')
+                            ->atPath('ptos_presentacion')
+                            ->addViolation();
+                    }
+                })
+            ]
             /*'constraints' => [
                 new Callback([$this, 'validate']),
             ]*/
@@ -94,13 +116,13 @@ class CompetenciaType extends AbstractType{
      * -ptos_ganado > ptos_empate
      * -ptos_presentacion < ptos_ganado
      *
-     * @param array<string,mixed> $data
+     * @param $data
      * @param ExecutionContextInterface $context
      */
-    public function validate(array $data, ExecutionContextInterface $context): void
+    /*public function validate($data, ExecutionContextInterface $context)
     {
         //TODO Ver como se enviará tipo_puntuacion desde el front end.
-        if ($data['tipo_puntuacion_id']== 1 && $data['cantidad_sets']%2 ==1 || $data['cantidad_sets'] > 10) {
+        if ($data['tipo_puntuacion_id']== 1 && ($data['cantidad_sets']%2 ==1 || $data['cantidad_sets'] > 10)) {
             $context->buildViolation('Cantidad de Sets debe ser un número impar y menor a 10')
                 ->atPath('cantidad_sets')
                 ->addViolation();
@@ -118,5 +140,5 @@ class CompetenciaType extends AbstractType{
                 ->addViolation();
         }
 
-    }
+    }*/
 }

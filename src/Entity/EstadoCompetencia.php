@@ -35,5 +35,20 @@ class EstadoCompetencia
      */
     private $nombre;
 
+    /**
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+
 
 }
