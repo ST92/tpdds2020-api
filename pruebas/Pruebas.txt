@@ -1,0 +1,45 @@
+Pruebas:
+	
+	-Liga válida por sets:
+
+		En el retorno:
+
+			-No está agregando en la lista de usuarios la competencia determinada. 
+			-No está seteando competencia en sedes la nueva sedes_competencia.
+
+	-Liga válida por puntos.
+
+	-Liga inválida -> ptos_empate>=Ptos_ganado
+
+	-Liga inválida-> ptos_presentacion>=ptos_ganado
+
+	-Liga inválida por ambos atributos:
+
+		-Genera ambos errores.
+
+
+	-Eliminación doble o simple valida por sets
+	-Eliminacion doble o simple por puntuacion
+
+	-Nombre repetido
+	
+	-Puntuacion por set -> set impar
+	-Puntuación por set -> set mayor a 10
+	-Puntuación por set -> ambos errores
+
+	-Puntuación por puntos -> seter un valor !=null en cantidad de sets
+
+
+
+	-Eliminación doble o simple -> ptos_presentacion!!=null
+	
+
+Cosas que no valida el back y que se deben consultar:
+	
+	-No valida el campo empate para el caso de eliminacion simple. Lo haríamos en el front pero consultar por las dudas.
+
+	-No valida que tipo_puntuacion sea distinto de set y que el campo cantidad_set sea nulo. O sea, si viene tipo de puntuacion con id 2, y cantidad de set no es nula, ese valor se guarda aunque nunca se manipule. Esto lo validaría el front. 
+
+	-No valida que si tipo_competencia ==2 o 3 (eliminación doble), los campos ptos_ganado, ptos_presencia, y cualquiera correspondiente a liga sea distinto de nulo. Debe validarlo el front. 
+
+	-Debe validarse en el front end que el arreglo de sedes_competencia no tenga dos sedes iguales. Es decir, que una misma sede tenga dos asociaciones sedes_competencia para una misma competencia. 
