@@ -23,7 +23,7 @@ class CompetenciaType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options){
 
-        $deporteTransformer = new EntityToIdObjectTransformer($options['em'], Deporte::class);
+        $deporteTransformer = new ObjectToIdTransformer($options['em'], Deporte::class);
         $usuarioTransformer = new ObjectToIdTransformer($options['em'], Usuario::class);
         $tipoCompetenciaTransformer = new ObjectToIdTransformer($options['em'], TipoCompetencia::class);
         $tipoPuntuacionTransformer = new ObjectToIdTransformer($options['em'], TipoPuntuacion::class);
