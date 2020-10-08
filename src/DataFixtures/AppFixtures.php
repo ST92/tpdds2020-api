@@ -2,9 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Estado;
-use App\Entity\MedioPago;
-use App\Entity\Rol;
 use App\Entity\Usuario;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -22,7 +19,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // Cargo los roles
-        $rol1 = new Rol();
+       /* $rol1 = new Rol();
         $rol1->setNombre('Admin');
         $rol1->setConstante('ROLE_ADMIN');
         $manager->persist($rol1);
@@ -103,6 +100,6 @@ class AppFixtures extends Fixture
         $estado6->setNombre('Cancelado');
         $manager->persist($estado6);
 
-        $manager->flush();
+        $manager->flush();*/
     }
 }

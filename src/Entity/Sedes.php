@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Sedes
@@ -47,7 +48,7 @@ class Sedes
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="fecha_borrado", type="date", nullable=false)
+     * @ORM\Column(name="fecha_borrado", type="date")
      */
     private $fechaBorrado;
 
@@ -65,7 +66,7 @@ class Sedes
      * @ORM\JoinTable(name="sedesdeporte",
      *     joinColumns={@ORM\JoinColumn(name="sedes_id", referencedColumnName = "id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="deporte_id", referencedColumnName = "id")})
-     * @Expose
+     * @Serializer\Expose()
      */
     private $listaDeportes;
 
