@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use function GuzzleHttp\Psr7\copy_to_string;
+use function MongoDB\BSON\toJSON;
 
 /**
  * @RouteResource("Competencias", pluralize=false)

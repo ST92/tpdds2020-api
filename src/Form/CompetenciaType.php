@@ -35,7 +35,7 @@ class CompetenciaType extends AbstractType{
         $builder
             ->add('nombre')
             ->add('reglamento')
-            ->add('permite_empate')
+            ->add('permite_empate',null, ['empty_data' => false])
             ->add('ptos_ganado')
             ->add('ptos_empate')
             ->add('ptos_presentacion')
@@ -84,9 +84,6 @@ class CompetenciaType extends AbstractType{
                     }
                 })
             ]
-            /*'constraints' => [
-                new Callback([$this, 'validate']),
-            ]*/
         ])
             ->setRequired('em');
     }

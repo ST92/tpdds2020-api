@@ -38,7 +38,7 @@ class Competencia
      * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
      */
     private $nombre;
-    //TODO agregar restricción en base de dato del unique.
+
     /**
      * @var string
      *
@@ -49,7 +49,7 @@ class Competencia
     /**
      * @var boolean
      *
-     * @ORM\Column(name="permite_empate", type="boolean", nullable=true)
+     * @ORM\Column(name="permite_empate", type="boolean", nullable=false)
      */
     private $permiteEmpate;
 
