@@ -102,7 +102,7 @@ class Competencia
     /**
      * @var EstadoCompetencia
      *
-     * @ORM\ManyToOne(targetEntity="EstadoCompetencia", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="EstadoCompetencia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="estado_competencia_id", referencedColumnName="id", nullable=false)
      * })
@@ -113,7 +113,7 @@ class Competencia
     /**
      * @var TipoCompetencia
      *
-     * @ORM\ManyToOne(targetEntity="TipoCompetencia", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="TipoCompetencia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipo_competencia_id", referencedColumnName="id", nullable=false)
      * })
@@ -123,7 +123,7 @@ class Competencia
     /**
      * @var Deporte
      *
-     * @ORM\ManyToOne(targetEntity="Deporte", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Deporte")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="deporte_id", referencedColumnName="id", nullable=false)
      * })
@@ -132,7 +132,7 @@ class Competencia
 
     /**
      * @var TipoPuntuacion
-     * @ORM\ManyToOne(targetEntity="TipoPuntuacion", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="TipoPuntuacion")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipo_puntuacion_id", referencedColumnName="id", nullable=false)
      * })
@@ -152,7 +152,7 @@ class Competencia
     /**
      * @var Usuario
      *
-     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy= "listaCompetencias", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Usuario")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=false)
      * })
@@ -166,11 +166,10 @@ class Competencia
      */
     private $listaSedesCompetencia;
 
-
     /**
      *  @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Participante", mappedBy="competenciaId", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Participante", mappedBy="competenciaId")
      *
      */
     private $listaParticipantes;

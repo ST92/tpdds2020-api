@@ -78,12 +78,6 @@ class Usuario
      */
     private $tipoDocumentoId;
 
-    /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Competencia", mappedBy="usuarioId", cascade={"persist", "remove"})
-     *
-     */
-    private $listaCompetencias;
 
     /**
      *  @var ArrayCollection
@@ -236,21 +230,6 @@ class Usuario
         $this->tipoDocumentoId = $tipoDocumentoId;
     }
 
-    /**
-     *
-     */
-    public function getListaCompetencias()
-    {
-        return $this->listaCompetencias;
-    }
-
-    /**
-     * @param $listaCompetencias
-     */
-    public function setListaCompetencias($listaCompetencias)
-    {
-        $this->listaCompetencias = $listaCompetencias;
-    }
 
     /**
      *

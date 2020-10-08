@@ -30,7 +30,6 @@ Pruebas:
 	-Puntuación por puntos -> seter un valor !=null en cantidad de sets
 
 
-
 	-Eliminación doble o simple -> ptos_presentacion!!=null
 	
 

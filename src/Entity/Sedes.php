@@ -74,13 +74,5 @@ class Sedes
      */
     private $listaDeportes;
 
-    /**
-     *  @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="SedesCompetencia", mappedBy="sedesId", cascade={"persist", "remove"})
-     *
-     */
-    private $listaSedesCompetencia; //TODO Quitar si no corresponde
-
 
 }

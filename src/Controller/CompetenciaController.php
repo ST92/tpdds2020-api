@@ -31,7 +31,7 @@ class CompetenciaController extends FOSRestController
      */
     public function postAction(Request $request){
 
-        //TODO Consultar
+
         $em = $this->getDoctrine()->getManager();
 
         $competencia = new Competencia();

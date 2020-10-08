@@ -31,7 +31,7 @@ class SedesCompetencia
     /**
      * @var Competencia
      *
-     * @ORM\ManyToOne(targetEntity="Competencia", inversedBy= "listaSedesCompetencia", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Competencia", inversedBy= "listaSedesCompetencia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="competencia_id", referencedColumnName="id", nullable=false)
      * })
@@ -41,7 +41,7 @@ class SedesCompetencia
     /**
      * @var Sedes
      *
-     * @ORM\ManyToOne(targetEntity="Sedes", inversedBy= "listaSedesCompetencia", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Sedes")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sedes_id", referencedColumnName="id", nullable=false)
      * })
