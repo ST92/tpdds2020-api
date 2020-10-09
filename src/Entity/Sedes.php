@@ -11,7 +11,7 @@ use JMS\Serializer\Annotation\Exclude;
  * Sedes
  *
  * @ORM\Table(name="sedes", indexes={@ORM\Index(name="usuario_fk_2", columns={"usuario_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\SedesRepository")
  */
 class Sedes
 {

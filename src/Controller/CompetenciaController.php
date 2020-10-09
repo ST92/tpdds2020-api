@@ -57,5 +57,8 @@ class CompetenciaController extends FOSRestController
         return $objForm;
     }
 
+    //TODO Implementar un cgetTipoCompetencia - CU004 - Alta Competencia
+    //TODO Implementar un cgetTipoPuntuacion - CU004 - Alta Competencia
+
 
 }

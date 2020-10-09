@@ -28,7 +28,8 @@ class CompetenciaType extends AbstractType{
         $tipoCompetenciaTransformer = new ObjectToIdTransformer($options['em'], TipoCompetencia::class);
         $tipoPuntuacionTransformer = new ObjectToIdTransformer($options['em'], TipoPuntuacion::class);
 
-        //Fecha de baja y estado es interno
+        //Fecha de baja es interno
+        //TODO Consultar por EstadoCompetencia.
 
         $builder
             ->add('nombre')

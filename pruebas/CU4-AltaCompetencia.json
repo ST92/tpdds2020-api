@@ -1,6 +1,6 @@
 {
-    "id": 11,
-    "nombre": "Competencia_Liga_Valida_Sets36754",
+    "id": 12,
+    "nombre": "Competencia_Liga_Valida_Sets12754",
     "reglamento": null,
     "permiteEmpate": true,
     "ptosGanado": 20,
@@ -39,7 +39,7 @@
     },
     "listaSedesCompetencia": [
         {
-            "id": 31,
+            "id": 34,
             "disponibilidad": 5,
             "competenciaId": null,
             "sedesId": {
@@ -65,7 +65,7 @@
             }
         },
         {
-            "id": 32,
+            "id": 35,
             "disponibilidad": 4,
             "competenciaId": null,
             "sedesId": {
@@ -91,7 +91,7 @@
             }
         },
         {
-            "id": 33,
+            "id": 36,
             "disponibilidad": 2,
             "competenciaId": null,
             "sedesId": {

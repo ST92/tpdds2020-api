@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Competencia;
+use App\Entity\Deporte;
 use App\Entity\EstadoCompetencia;
 use App\Entity\Sedes;
 use App\Entity\SedesCompetencia;
 use App\Entity\Usuario;
 use App\Form\CompetenciaType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -31,15 +34,46 @@ class SedesController extends FOSRestController
     /**
      * Devuelve una sedecompetencia
      *
-     * @param SedesCompetencia $sedesCompetencia
+     * @param Sedes $sedesCompetencia
      *
-     * @return SedesCompetencia
+     * @return Sedes
      *
      * @View()
      */
-    public function getAction(SedesCompetencia $sedesCompetencia){
+    public function getAction(Sedes $sedesCompetencia)
+    {
         return $sedesCompetencia;
     }
+
+
+
+    /**
+     * Devuelve las sedes.
+     * TODO Implementar para CU004 - Dar Alta Competencia.
+     *
+     */
+    public function cgetAction()
+    {
+
+    }
+
+    /**
+     * Devuelve los deportes ordenados alfabeticamente
+     *
+     * @View()
+     *
+     * @return array|object[]
+     */
+    public function cgetDeporteAction(){
+
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        return $em->getRepository(Deporte::class)->findBy([],['nombre' => 'ASC']);
+
+
+    }
+
 
 
 }
