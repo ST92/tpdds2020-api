@@ -166,13 +166,7 @@ class Competencia
      */
     private $listaSedesCompetencia;
 
-    /**
-     *  @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Participante", mappedBy="competenciaId")
-     *
-     */
-    private $listaParticipantes;
+
 
 
 
@@ -436,56 +430,16 @@ class Competencia
         $this->listaSedesCompetencia = $listaSedesCompetencia;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getListaParticipantes()
-    {
-        return $this->listaParticipantes;
-    }
+
 
     /**
-     * @param ArrayCollection $listaParticipantes
      */
-    public function setListaParticipantes(ArrayCollection $listaParticipantes)
-    {
-        $this->listaParticipantes = $listaParticipantes;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
 
-    /*/**
-     * @Assert\Callback
-     * @param ExecutionContextInterface $context
-     * @param $payload
-     */
-   /* public function validate(ExecutionContextInterface $context, $payload)
-    {
-        if ($this->estadoCompetenciaId->getId() == 1 && (($this->cantidadSets)%2 == 1 || $this->cantidadSets > 10)) {
-            $context->buildViolation('Cantidad de Sets debe ser un número impar y menor a 10')
-                ->atPath('cantidad_sets')
-                ->addViolation();
-        }
 
-        if ($this->tipoCompetenciaId->getId() == 1 && $this->ptosEmpate>=$this->ptosGanado) {
-            $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Empate')
-                ->atPath('ptos_empate')
-                ->addViolation();
-        }
-
-        if ($this->tipoCompetenciaId->getId()== 1 && $this->ptosPresentacion>=$this->ptosGanado){
-            $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Presentarse')
-                ->atPath('ptos_presentacion')
-                ->addViolation();
-        }
-
-    }*/
 
 }

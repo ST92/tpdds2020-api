@@ -33,17 +33,17 @@ class CompetenciaType extends AbstractType{
         $builder
             ->add('nombre')
             ->add('reglamento')
-            ->add('permite_empate',null, ['empty_data' => false])
-            ->add('ptos_ganado')
-            ->add('ptos_empate')
-            ->add('ptos_presentacion')
-            ->add('ptos_ausencia')
-            ->add('cantidad_sets')
-            ->add($builder->create('deporte_id', TextType::class)->addModelTransformer($deporteTransformer))
-            ->add($builder->create('usuario_id', TextType::class)->addModelTransformer($usuarioTransformer))
-            ->add($builder->create('tipo_competencia_id', TextType::class)->addModelTransformer($tipoCompetenciaTransformer))
-            ->add($builder->create('tipo_puntuacion_id', TextType::class)->addModelTransformer($tipoPuntuacionTransformer))
-            ->add('lista_sedes_competencia', CollectionType::class, [
+            ->add('permiteEmpate',null, ['empty_data' => false])
+            ->add('ptosGanado')
+            ->add('ptosEmpate')
+            ->add('ptosPresentacion')
+            ->add('ptosAusencia')
+            ->add('cantidadSets')
+            ->add($builder->create('deporteId', TextType::class)->addModelTransformer($deporteTransformer))
+            ->add($builder->create('usuarioId', TextType::class)->addModelTransformer($usuarioTransformer))
+            ->add($builder->create('tipoCompetenciaId', TextType::class)->addModelTransformer($tipoCompetenciaTransformer))
+            ->add($builder->create('tipoPuntuacionId', TextType::class)->addModelTransformer($tipoPuntuacionTransformer))
+            ->add('listaSedesCompetencia', CollectionType::class, [
                 'entry_type' => SedesCompetenciaType::class,
                 'allow_add' => true,
                 'allow_delete' => true,

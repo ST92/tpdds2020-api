@@ -1,20 +1,20 @@
 {
     "nombre": "Competencia_Liga_Valida_Puntos",
     "reglamento":" ",
-    "permite_empate": false,
-    "ptos_ganado":20,
-    "ptos_empate":null,
-    "ptos_presentacion": 10,
-    "ptos_ausencia": 15,
-    "cantidad_sets": null,
-    "deporte_id": 2,
-    "usuario_id": 1,
-    "tipo_competencia_id": 1,
-    "tipo_puntuacion_id": 2,
-    "lista_sedes_competencia":[
+    "permiteEmpate": false,
+    "ptosGanado":20,
+    "ptosEmpate":null,
+    "ptosPresentacion": 10,
+    "ptosAusencia": 15,
+    "cantidadSets": null,
+    "deporteId": 2,
+    "usuarioId": 1,
+    "tipoCompetenciaId": 1,
+    "tipoPuntuacionId": 2,
+    "listaSedesCompetencia":[
         {
             "disponibilidad":10,
-            "sedes_id":2
+            "sedesId":2
         }
 
     ]

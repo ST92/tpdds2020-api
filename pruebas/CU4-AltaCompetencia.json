@@ -1,6 +1,6 @@
 {
-    "id": 5,
-    "nombre": "Competencia_Liga_Valida_Sets42",
+    "id": 11,
+    "nombre": "Competencia_Liga_Valida_Sets36754",
     "reglamento": null,
     "permiteEmpate": true,
     "ptosGanado": 20,
@@ -31,7 +31,7 @@
         "nombre": "Armando Esteban",
         "apellido": "Quito",
         "email": "aquito@gmail.com",
-        "password": "constrase\u00f1a",
+        "password": "constraseña",
         "documento": 38983478,
         "confirmacionTerminos": true,
         "localidadId": 130,
@@ -39,7 +39,7 @@
     },
     "listaSedesCompetencia": [
         {
-            "id": 13,
+            "id": 31,
             "disponibilidad": 5,
             "competenciaId": null,
             "sedesId": {
@@ -48,22 +48,24 @@
                 "nombre": "Rafael Osinalde",
                 "descripcion": "Cancha de futball",
                 "fechaBorrado": null,
-                "usuarioId": {
-                    "id": 1,
-                    "nombre": "Armando Esteban",
-                    "apellido": "Quito",
-                    "email": "aquito@gmail.com",
-                    "password": "constrase\u00f1a",
-                    "documento": 38983478,
-                    "confirmacionTerminos": true,
-                    "localidadId": 130,
-                    "tipoDocumentoId": 1
-                },
-                "listaDeportes": []
+                "listaDeportes": [
+                    {
+                        "id": 1,
+                        "nombre": "football"
+                    },
+                    {
+                        "id": 2,
+                        "nombre": "basquet"
+                    },
+                    {
+                        "id": 3,
+                        "nombre": "tenis"
+                    }
+                ]
             }
         },
         {
-            "id": 14,
+            "id": 32,
             "disponibilidad": 4,
             "competenciaId": null,
             "sedesId": {
@@ -72,22 +74,24 @@
                 "nombre": "Gregorio Panizza",
                 "descripcion": "Cancha de basquet",
                 "fechaBorrado": null,
-                "usuarioId": {
-                    "id": 1,
-                    "nombre": "Armando Esteban",
-                    "apellido": "Quito",
-                    "email": "aquito@gmail.com",
-                    "password": "constrase\u00f1a",
-                    "documento": 38983478,
-                    "confirmacionTerminos": true,
-                    "localidadId": 130,
-                    "tipoDocumentoId": 1
-                },
-                "listaDeportes": []
+                "listaDeportes": [
+                    {
+                        "id": 1,
+                        "nombre": "football"
+                    },
+                    {
+                        "id": 2,
+                        "nombre": "basquet"
+                    },
+                    {
+                        "id": 3,
+                        "nombre": "tenis"
+                    }
+                ]
             }
         },
         {
-            "id": 15,
+            "id": 33,
             "disponibilidad": 2,
             "competenciaId": null,
             "sedesId": {
@@ -96,20 +100,21 @@
                 "nombre": "Club Talense",
                 "descripcion": "Cancha de tenis",
                 "fechaBorrado": null,
-                "usuarioId": {
-                    "id": 1,
-                    "nombre": "Armando Esteban",
-                    "apellido": "Quito",
-                    "email": "aquito@gmail.com",
-                    "password": "constrase\u00f1a",
-                    "documento": 38983478,
-                    "confirmacionTerminos": true,
-                    "localidadId": 130,
-                    "tipoDocumentoId": 1
-                },
-                "listaDeportes": []
+                "listaDeportes": [
+                    {
+                        "id": 1,
+                        "nombre": "football"
+                    },
+                    {
+                        "id": 2,
+                        "nombre": "basquet"
+                    },
+                    {
+                        "id": 3,
+                        "nombre": "tenis"
+                    }
+                ]
             }
         }
-    ],
-    "listaParticipantes": null
+    ]
 }

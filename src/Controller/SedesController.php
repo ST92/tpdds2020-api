@@ -23,9 +23,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 /**
- * @RouteResource("SedesCompetencias", pluralize=false)
+ * @RouteResource("Sedes", pluralize=false)
  */
-class SedesCompetenciaController extends FOSRestController
+class SedesController extends FOSRestController
 {
 
     /**

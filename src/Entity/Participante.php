@@ -39,7 +39,7 @@ class Participante
     /**
      * @var Competencia
      *
-     * @ORM\ManyToOne(targetEntity="Competencia", inversedBy= "listaParticipantes", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Competencia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="competencia_id", referencedColumnName="id", nullable=false)
      * })

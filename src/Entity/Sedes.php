@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Sedes
@@ -57,8 +58,8 @@ class Sedes
     /**
      * @ORM\ManyToOne(targetEntity="Usuario")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=false)
+     * @Exclude()
      */
-
     private $usuarioId;
 
     /**
