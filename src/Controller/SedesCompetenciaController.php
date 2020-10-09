@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Competencia;
 use App\Entity\EstadoCompetencia;
+use App\Entity\Sedes;
 use App\Entity\SedesCompetencia;
+use App\Entity\Usuario;
 use App\Form\CompetenciaType;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;

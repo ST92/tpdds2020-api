@@ -54,13 +54,11 @@ class Sedes
     /**
      * @var Usuario
      *
-     * @ORM\Column(name="usuario_id", type="integer", nullable=false)
-     *
-     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy= "listaSedes", cascade={"persist", "remove"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=false)
-     * })
+    /**
+     * @ORM\ManyToOne(targetEntity="Usuario")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=false)
      */
+
     private $usuarioId;
 
     /**
@@ -73,6 +71,120 @@ class Sedes
      *
      */
     private $listaDeportes;
+
+
+
+
+
+
+
+
+    /**
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
+    }
+
+    /**
+     * @param $codigo
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+    }
+
+    /**
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * @param $nombre
+     */
+    public function setNombre(string $nombre)
+    {
+        $this->nombre = $nombre;
+    }
+
+    /**
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * @param $descripcion
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    }
+
+    /**
+     */
+    public function getFechaBorrado()
+    {
+        return $this->fechaBorrado;
+    }
+
+    /**
+     * @param $fechaBorrado
+     */
+    public function setFechaBorrado($fechaBorrado)
+    {
+        $this->fechaBorrado = $fechaBorrado;
+    }
+
+    /**
+     */
+    public function getUsuarioId()
+    {
+        return $this->usuarioId;
+    }
+
+    /**
+     * @param  $usuarioId
+     */
+    public function setUsuarioId( $usuarioId)
+    {
+        $this->usuarioId = $usuarioId;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getListaDeportes()
+    {
+        return $this->listaDeportes;
+    }
+
+    /**
+     * @param ArrayCollection $listaDeportes
+     */
+    public function setListaDeportes(ArrayCollection $listaDeportes)
+    {
+        $this->listaDeportes = $listaDeportes;
+    }
+
 
 
 }

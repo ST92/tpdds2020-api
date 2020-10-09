@@ -79,11 +79,6 @@ class Usuario
     private $tipoDocumentoId;
 
 
-    /**
-     *  @var ArrayCollection
-     *
-     */
-    private $listaSedes;
 
 
 
@@ -231,21 +226,6 @@ class Usuario
     }
 
 
-    /**
-     *
-     */
-    public function getListaSedes()
-    {
-        return $this->listaSedes;
-    }
-
-    /**
-     * @param $listaSedes
-     */
-    public function setListaSedes($listaSedes)
-    {
-        $this->listaSedes = $listaSedes;
-    }
 
 
 

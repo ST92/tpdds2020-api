@@ -29,8 +29,6 @@ class CompetenciaType extends AbstractType{
         $tipoPuntuacionTransformer = new ObjectToIdTransformer($options['em'], TipoPuntuacion::class);
 
         //Fecha de baja y estado es interno
-        //TODO Falta agregar las validaciones en puntos, y sobre nombre.
-        //TODO agregar participante Controller
 
         $builder
             ->add('nombre')

@@ -41,4 +41,9 @@ Cosas que no valida el back y que se deben consultar:
 
 	-No valida que si tipo_competencia ==2 o 3 (eliminación doble), los campos ptos_ganado, ptos_presencia, y cualquiera correspondiente a liga sea distinto de nulo. Debe validarlo el front. 
 
-	-Debe validarse en el front end que el arreglo de sedes_competencia no tenga dos sedes iguales. Es decir, que una misma sede tenga dos asociaciones sedes_competencia para una misma competencia. 
+	-Debe validarse en el front end que el arreglo de sedes_competencia no tenga dos sedes iguales. Es decir, que una misma sede tenga dos asociaciones sedes_competencia para una misma competencia.
+
+Doctrine:
+
+    Si se realiza un get de un usuario específico, se retornará la lista de sedes pero con el usuario seteado en null.
+    Creo que es porque Doctrine solo valida un lado de la relación.
