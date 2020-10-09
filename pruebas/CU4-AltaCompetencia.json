@@ -1,0 +1,115 @@
+{
+    "id": 5,
+    "nombre": "Competencia_Liga_Valida_Sets42",
+    "reglamento": null,
+    "permiteEmpate": true,
+    "ptosGanado": 20,
+    "ptosEmpate": 10,
+    "ptosPresentacion": 10,
+    "ptosAusencia": null,
+    "cantidadSets": 5,
+    "fechaBaja": null,
+    "estadoCompetenciaId": {
+        "id": 1,
+        "nombre": "CREADA"
+    },
+    "tipoCompetenciaId": {
+        "id": 1,
+        "nombre": "LIGA"
+    },
+    "deporteId": {
+        "id": 1,
+        "nombre": "football"
+    },
+    "tipoPuntuacionId": {
+        "id": 2,
+        "nombre": "PUNTUACION"
+    },
+    "fixtureId": null,
+    "usuarioId": {
+        "id": 1,
+        "nombre": "Armando Esteban",
+        "apellido": "Quito",
+        "email": "aquito@gmail.com",
+        "password": "constrase\u00f1a",
+        "documento": 38983478,
+        "confirmacionTerminos": true,
+        "localidadId": 130,
+        "tipoDocumentoId": 1
+    },
+    "listaSedesCompetencia": [
+        {
+            "id": 13,
+            "disponibilidad": 5,
+            "competenciaId": null,
+            "sedesId": {
+                "id": 1,
+                "codigo": 1,
+                "nombre": "Rafael Osinalde",
+                "descripcion": "Cancha de futball",
+                "fechaBorrado": null,
+                "usuarioId": {
+                    "id": 1,
+                    "nombre": "Armando Esteban",
+                    "apellido": "Quito",
+                    "email": "aquito@gmail.com",
+                    "password": "constrase\u00f1a",
+                    "documento": 38983478,
+                    "confirmacionTerminos": true,
+                    "localidadId": 130,
+                    "tipoDocumentoId": 1
+                },
+                "listaDeportes": []
+            }
+        },
+        {
+            "id": 14,
+            "disponibilidad": 4,
+            "competenciaId": null,
+            "sedesId": {
+                "id": 2,
+                "codigo": 2,
+                "nombre": "Gregorio Panizza",
+                "descripcion": "Cancha de basquet",
+                "fechaBorrado": null,
+                "usuarioId": {
+                    "id": 1,
+                    "nombre": "Armando Esteban",
+                    "apellido": "Quito",
+                    "email": "aquito@gmail.com",
+                    "password": "constrase\u00f1a",
+                    "documento": 38983478,
+                    "confirmacionTerminos": true,
+                    "localidadId": 130,
+                    "tipoDocumentoId": 1
+                },
+                "listaDeportes": []
+            }
+        },
+        {
+            "id": 15,
+            "disponibilidad": 2,
+            "competenciaId": null,
+            "sedesId": {
+                "id": 3,
+                "codigo": 3,
+                "nombre": "Club Talense",
+                "descripcion": "Cancha de tenis",
+                "fechaBorrado": null,
+                "usuarioId": {
+                    "id": 1,
+                    "nombre": "Armando Esteban",
+                    "apellido": "Quito",
+                    "email": "aquito@gmail.com",
+                    "password": "constrase\u00f1a",
+                    "documento": 38983478,
+                    "confirmacionTerminos": true,
+                    "localidadId": 130,
+                    "tipoDocumentoId": 1
+                },
+                "listaDeportes": []
+            }
+        }
+    ],
+    "listaParticipantes": null
+}
