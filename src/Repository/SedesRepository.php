@@ -93,7 +93,7 @@ class SedesRepository extends ServiceEntityRepository
 
         $query = $this->getEntityManager()
             ->createQuery(
-                "SELECT e FROM App:Sedes d $joinWithStr $where $orderByStr"
+                "SELECT s FROM App:Sedes s $joinWithStr $where $orderByStr"
             )
             ->setParameters($paramsArray)
             ->setMaxResults($limit)

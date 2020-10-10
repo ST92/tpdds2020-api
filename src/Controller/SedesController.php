@@ -32,6 +32,39 @@ class SedesController extends FOSRestController
 {
 
     /**
+     * Devuelve las sedes
+     *
+     * @param ParamFetcherInterface $paramFetcher
+     *
+     * @View()
+     *
+     * @QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing notes.")
+     * @QueryParam(name="limit", requirements="\d+", default="100", description="How many notes to return.")
+     * @QueryParam(name="order_by", nullable=true, description="Order by fields. Must be an array ie. &order_by[name]=ASC&order_by[description]=DESC")
+     * @QueryParam(name="filters", nullable=true, description="Filter by fields. Must be an array ie. &filters[id]=3")
+     * @QueryParam(name="operators", nullable=true, description="Operator by fields. Must be an array ie. &operators[id]=>")
+     *
+     * @return array
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     */
+    public function cgetAction(ParamFetcherInterface $paramFetcher)
+    {
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
+        $order_by = !is_null($paramFetcher->get('order_by')) ? $paramFetcher->get('order_by') : array();
+        $filters = !is_null($paramFetcher->get('filters')) ? $paramFetcher->get('filters') : array();
+        $operators = !is_null($paramFetcher->get('filters')) ? $paramFetcher->get('operators') : array();
+
+        $em = $this->getDoctrine()->getManager();
+
+        return [
+            'sedes' => $em->getRepository(Sedes::class)->findByGrid($filters, $operators, $order_by, $limit, $offset),
+        ];
+    }
+
+    /**
      * Devuelve una sedecompetencia
      *
      * @param Sedes $sedesCompetencia
@@ -43,18 +76,6 @@ class SedesController extends FOSRestController
     public function getAction(Sedes $sedesCompetencia)
     {
         return $sedesCompetencia;
-    }
-
-
-
-    /**
-     * Devuelve las sedes.
-     * TODO Implementar para CU004 - Dar Alta Competencia.
-     *
-     */
-    public function cgetAction()
-    {
-
     }
 
     /**
@@ -70,8 +91,6 @@ class SedesController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
 
         return $em->getRepository(Deporte::class)->findBy([],['nombre' => 'ASC']);
-
-
     }
 
 
