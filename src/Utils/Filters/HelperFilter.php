@@ -121,4 +121,10 @@ class HelperFilter
                 break;
         }
     }
+
+    static function makeOperatorIn($alias, $campo, $variable, $value, $operadors, &$filterArray, &$paramsArray)
+    {
+        $filterArray[] = $alias . '.' . $campo . ' IN(:' . $variable . ')';
+        $paramsArray[$variable] = explode(',', $value);
+    }
 }
