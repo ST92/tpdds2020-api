@@ -66,19 +66,19 @@ class CompetenciaType extends AbstractType{
                 {
                     if ($data->getTipoPuntuacionId()->getId()== 1 && ($data->getCantidadSets()%2 ==1 || $data->getCantidadSets() > 10)) {
                         $context->buildViolation('Cantidad de Sets debe ser un número impar y menor a 10')
-                            ->atPath('cantidad_sets')
+                            ->atPath('cantidadSets')
                             ->addViolation();
                     }
 
                     if ($data->getTipoCompetenciaId()->getId() == 1 && $data->getPtosEmpate()>=$data->getPtosGanado()) {
                         $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Empate')
-                            ->atPath('ptos_empate')
+                            ->atPath('ptosEmpate')
                             ->addViolation();
                     }
 
                     if ($data->getTipoCompetenciaId()->getId()== 1 && $data->getPtosPresentacion() >= $data->getPtosGanado()){
                         $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Presentarse')
-                            ->atPath('ptos_presentacion')
+                            ->atPath('ptosPresentacion')
                             ->addViolation();
                     }
                 })
