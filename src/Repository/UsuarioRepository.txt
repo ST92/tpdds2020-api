@@ -237,7 +237,7 @@ class UsuarioRepository extends ServiceEntityRepository implements UserLoaderInt
      */
     public function refreshUser(UserInterface $user)
     {
-        // TODO: Implement refreshUser() method.
+
     }
 
     /**
@@ -249,7 +249,7 @@ class UsuarioRepository extends ServiceEntityRepository implements UserLoaderInt
      */
     public function supportsClass($class)
     {
-        // TODO: Implement supportsClass() method.
+
     }
 
     /**

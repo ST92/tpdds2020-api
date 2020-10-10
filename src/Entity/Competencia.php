@@ -95,6 +95,8 @@ class Competencia
      * @var DateTime
      *
      * @ORM\Column(name="fecha_baja", type="date", nullable=true)
+     *
+     * TODO Consultar si esto es interno o no al sistema.
      */
     private $fechaBaja;
 

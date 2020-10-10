@@ -28,8 +28,7 @@ class CompetenciaType extends AbstractType{
         $tipoCompetenciaTransformer = new ObjectToIdTransformer($options['em'], TipoCompetencia::class);
         $tipoPuntuacionTransformer = new ObjectToIdTransformer($options['em'], TipoPuntuacion::class);
 
-        //Fecha de baja es interno
-        //TODO Consultar por EstadoCompetencia.
+
 
         $builder
             ->add('nombre')
@@ -64,6 +63,12 @@ class CompetenciaType extends AbstractType{
             'constraints' =>[
                 new Callback(function(Competencia $data, ExecutionContextInterface $context)
                 {
+                    /**
+                     * -nombre_competencia unico -> UniqueEntity
+                     * -cantidad_set -> impar y <10
+                     * -ptos_ganado > ptos_empate
+                     * -ptos_presentacion < ptos_ganado
+                     */
                     if ($data->getTipoPuntuacionId()->getId()== 1 && ($data->getCantidadSets()%2 ==1 || $data->getCantidadSets() > 10)) {
                         $context->buildViolation('Cantidad de Sets debe ser un número impar y menor a 10')
                             ->atPath('cantidadSets')
@@ -95,46 +100,6 @@ class CompetenciaType extends AbstractType{
         return '';
     }
 
-    /**
-     * Validaciones:
-     *      Para todos -> No nulo: nombre_competencia, deporte, lugares, modealidad
-     *          opcional: reglamento
-     *
-     *  - Sistema liga -> No nulo: ptos_ganado, permite_empate, ptos_empate,ptos_presentacion,
-     *  - Eliminacion simple -> No nulo: forma puntuacion. El resto no debe considerarse (no empate, no puntos por presentarse, no puntos por partido ganado)
-     *
-     * -Puntuación:
-     *      -Sets -> No nulo: cantidad_sets
-     *      -Puntuación -> No nulo: ptos_ausencia
-     *
-     * -nombre_competencia unico -> UniqueEntity
-     * -cantidad_set -> impar y <10
-     * -ptos_ganado > ptos_empate
-     * -ptos_presentacion < ptos_ganado
-     *
-     * @param $data
-     * @param ExecutionContextInterface $context
-     */
-    /*public function validate($data, ExecutionContextInterface $context)
-    {
-        //TODO Ver como se enviará tipo_puntuacion desde el front end.
-        if ($data['tipo_puntuacion_id']== 1 && ($data['cantidad_sets']%2 ==1 || $data['cantidad_sets'] > 10)) {
-            $context->buildViolation('Cantidad de Sets debe ser un número impar y menor a 10')
-                ->atPath('cantidad_sets')
-                ->addViolation();
-        }
 
-        if ($data['tipo_competencia_id'] == 1 && $data['ptos_empate']>=$data['ptos_ganado']) {
-            $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Empate')
-                ->atPath('ptos_empate')
-                ->addViolation();
-        }
 
-        if ($data['tipo_competencia_id']== 1 && $data['ptos_presentacion'] >= $data['ptos_ganado']){
-            $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Presentarse')
-                ->atPath('ptos_presentacion')
-                ->addViolation();
-        }
-
-    }*/
 }

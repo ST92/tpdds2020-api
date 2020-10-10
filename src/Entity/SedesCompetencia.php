@@ -114,7 +114,7 @@ class SedesCompetencia
         $this->sedesId = $sedesId;
     }
 
-    //TODO Consultar: es una relación bidireccional con sedes?
+
 
 
 

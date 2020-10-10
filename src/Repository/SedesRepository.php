@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Sedes;
 use App\Utils\Filters\HelperFilter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -43,8 +45,8 @@ class SedesRepository extends ServiceEntityRepository
                 case 'id';
                     HelperFilter::makeNumeric('s', $campo, $valor, $operators, $filterArray, $paramsArray);
                     break;
-                case 'usuario.id';
-                    $joinWithArray[] = 'JOIN s.usuario u ';
+                case 'usuarioId.id';
+                    $joinWithArray[] = 'JOIN s.usuarioId u ';
                     HelperFilter::makeId('u', 'id', $valor, $operators, $filterArray, $paramsArray);
                     break;
                 case 'deporte.id';
@@ -61,9 +63,9 @@ class SedesRepository extends ServiceEntityRepository
                 case 'id';
                     $orderByArray[] = 's.id ' . $direccion;
                     break;
-                case 'usuario.id';
-                    if (!in_array('JOIN s.usuario u ', $joinWithArray)) {
-                        $joinWithArray[] = 'JOIN s.usuario u ';
+                case 'usuarioId.id';
+                    if (!in_array('JOIN s.usuarioId u ', $joinWithArray)) {
+                        $joinWithArray[] = 'JOIN s.usuarioId u ';
                     }
                     $orderByArray[] = 'u.id ' . $direccion;
                     break;
@@ -109,8 +111,8 @@ class SedesRepository extends ServiceEntityRepository
      * @param $operators
      *
      * @return integer
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function countByGrid($filters, $operators)
     {
@@ -124,8 +126,8 @@ class SedesRepository extends ServiceEntityRepository
                 case 'id';
                     HelperFilter::makeNumeric('s', $campo, $valor, $operators, $filterArray, $paramsArray);
                     break;
-                case 'usuario.id';
-                    $joinWithArray[] = 'JOIN s.usuario u ';
+                case 'usuarioId.id';
+                    $joinWithArray[] = 'JOIN s.usuarioId u ';
                     HelperFilter::makeId('u', 'id', $valor, $operators, $filterArray, $paramsArray);
                     break;
                 case 'deporte.id';

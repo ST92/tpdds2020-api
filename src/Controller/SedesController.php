@@ -46,7 +46,6 @@ class SedesController extends FOSRestController
      *
      * @return array
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
      *
      */
     public function cgetAction(ParamFetcherInterface $paramFetcher)
@@ -65,20 +64,6 @@ class SedesController extends FOSRestController
     }
 
     /**
-     * Devuelve una sedecompetencia
-     *
-     * @param Sedes $sedesCompetencia
-     *
-     * @return Sedes
-     *
-     * @View()
-     */
-    public function getAction(Sedes $sedesCompetencia)
-    {
-        return $sedesCompetencia;
-    }
-
-    /**
      * Devuelve los deportes ordenados alfabeticamente
      *
      * @View()
@@ -93,6 +78,19 @@ class SedesController extends FOSRestController
         return $em->getRepository(Deporte::class)->findBy([],['nombre' => 'ASC']);
     }
 
+    /**
+     * Devuelve una sede específica
+     *
+     * @param Sedes $sedes
+     *
+     * @return Sedes
+     *
+     * @View()
+     */
+    public function getAction(Sedes $sedes)
+    {
+        return $sedes;
+    }
 
 
 }

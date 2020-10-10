@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Competencia;
 use App\Entity\EstadoCompetencia;
+use App\Entity\TipoCompetencia;
+use App\Entity\TipoPuntuacion;
 use App\Form\CompetenciaType;
+use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -57,8 +60,39 @@ class CompetenciaController extends FOSRestController
         return $objForm;
     }
 
-    //TODO Implementar un cgetTipoCompetencia - CU004 - Alta Competencia
-    //TODO Implementar un cgetTipoPuntuacion - CU004 - Alta Competencia
 
+
+    //TODO Consultar si se puede dejar en interfaz
+    /**
+     * Devuelve los tipos de competencia ordenados alfabeticamente
+     *
+     * @View()
+     *
+     * @return array|object[]
+     */
+    public function cgetTipocompetenciaAction(){
+
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        return $em->getRepository(TipoCompetencia::class)->findBy([],['nombre' => 'ASC']);
+    }
+
+
+
+    /**
+     * Devuelve los tipos de puntuación ordenados alfabeticamente
+     *
+     * @View()
+     *
+     * @return array|object[]
+     */
+    public function cgetTipopuntuacionAction(){
+
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        return $em->getRepository(TipoPuntuacion::class)->findBy([],['nombre' => 'ASC']);
+    }
 
 }
