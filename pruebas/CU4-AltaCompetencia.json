@@ -35,7 +35,10 @@
         "documento": 38983478,
         "confirmacionTerminos": true,
         "localidadId": 130,
-        "tipoDocumentoId": 1
+        "tipoDocumentoId": {
+            "id": 1,
+            "nombre": "DNI"
+        }
     },
     "listaSedesCompetencia": [
         {

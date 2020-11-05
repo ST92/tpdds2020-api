@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,54 +43,85 @@ class Encuentro
      */
     private $asistenciaParticipante2;
 
+
     /**
-     * @var int
+     * @var Participante
      *
-     * @ORM\Column(name="participante1_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Participante")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="participante1_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $participante1Id;
 
     /**
-     * @var int
+     * @var Participante
      *
-     * @ORM\Column(name="participante2_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Participante")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="participante2_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $participante2Id;
 
     /**
-     * @var int
+     * @var Participante
      *
-     * @ORM\Column(name="ganador_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Participante")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ganador_id", referencedColumnName="id", nullable=true)
+     * })
      */
     private $ganadorId;
 
+
     /**
-     * @var int
+     * @var Sedes
      *
-     * @ORM\Column(name="sedes_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Sedes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sedes_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $sedesId;
 
+
     /**
-     * @var int
+     * @var Ronda
      *
-     * @ORM\Column(name="ronda_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Ronda")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ronda_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $rondaId;
 
+    //TODO Creo que esto sería unidireccional. Buscar una asociación consigo misma
     /**
-     * @var int
+     * @var Encuentro
      *
-     * @ORM\Column(name="encuentro_perdedor_id", type="integer", nullable=false)
+     * @ORM\OneToOne(targetEntity="Encuentro")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="encuentro_perdedor_id", referencedColumnName="id", nullable=true)
+     * })
      */
     private $encuentroPerdedorId;
 
     /**
-     * @var int
+     * @var Encuentro
      *
-     * @ORM\Column(name="encuentro_ganador_id", type="integer", nullable=false)
+     * @ORM\OneToOne(targetEntity="Encuentro")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="encuentro_ganador_id", referencedColumnName="id", nullable=true)
+     * })
      */
     private $encuentroGanadorId;
 
+    /**
+     *  @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Resultado", mappedBy="encuentroId", cascade={"persist", "remove"})
+     */
+    private $listaResultados;
 
 }

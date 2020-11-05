@@ -36,18 +36,14 @@ class Resultado
     private $puntosParticipante2;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="encuentro_id", type="integer", nullable=false)
+     * @var Encuentro
+     * @ORM\ManyToOne(targetEntity="Encuentro", inversedBy= "listaResultados")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="encuentro_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $encuentroId;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="historial_resultado_id", type="integer", nullable=false)
-     */
-    private $historialResultadoId;
 
 
 }

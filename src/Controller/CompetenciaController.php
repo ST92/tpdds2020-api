@@ -62,7 +62,6 @@ class CompetenciaController extends FOSRestController
 
 
 
-    //TODO Consultar si se puede dejar en interfaz
     /**
      * Devuelve los tipos de competencia ordenados alfabeticamente
      *

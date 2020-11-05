@@ -1,18 +1,18 @@
 <?php
 
+
 namespace App\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * HistorialResultado
+ * Resultado
  *
  * @ORM\Table(name="historialresultado")
  * @ORM\Entity
  */
-class HistorialResultado
-{
+class HistorialResultado{
+
     /**
      * @var int
      *
@@ -23,60 +23,27 @@ class HistorialResultado
     private $id;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="fecha_historial", type="date", nullable=false)
-     */
-    private $fechaHistorial;
-
-    /**
      * @var int
      *
-     * @ORM\Column(name="puntos_participante_1", type="integer", nullable=false)
+     * @ORM\Column(name="puntosparticipante1", type="date", nullable=false)
      */
     private $puntosParticipante1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="puntos_participante_2", type="integer", nullable=false)
+     * @ORM\Column(name="puntosparticipante2", type="date", nullable=false)
      */
     private $puntosParticipante2;
 
     /**
-     * @var bool
+     * @var HistorialEncuentro
      *
-     * @ORM\Column(name="encuentro_empatado", type="boolean", nullable=false)
+     * @ORM\ManyToOne(targetEntity="HistorialEncuentro", inversedBy= "listaResultados")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="historial_encuentro_id", referencedColumnName="id", nullable=false)
+     * })
      */
-    private $encuentroEmpatado;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="asistencia_participante_1", type="boolean", nullable=false)
-     */
-    private $asistenciaParticipante1;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="asistencia_participante_2", type="boolean", nullable=false)
-     */
-    private $asistenciaParticipante2;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ganador_id", type="integer", nullable=false)
-     */
-    private $ganadorId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="encuentro_id", type="integer", nullable=false)
-     */
-    private $encuentroId;
-
+    private $historialEncuentroId;
 
 }

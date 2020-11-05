@@ -30,16 +30,16 @@ INSERT INTO sedes (id, codigo, nombre, descripcion, usuario_id, fecha_borrado)
 INSERT INTO sedes (id, codigo, nombre, descripcion, usuario_id, fecha_borrado) 
 	VALUES (4, 4, '2 de Enero', 'Cancha de futball', 1,null);
 
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (1, 1);
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (1, 2);
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (1, 3);
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (2, 1);
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (2, 2);
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (2, 3);
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (3, 1);
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (3, 2);
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (3, 3);
-INSERT INTO sedesdeporte(sedes_id, deporte_id) VALUES (4, 1);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (1, 1);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (1, 2);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (1, 3);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (2, 1);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (2, 2);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (2, 3);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (3, 1);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (3, 2);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (3, 3);
+INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (4, 1);
 
 
 

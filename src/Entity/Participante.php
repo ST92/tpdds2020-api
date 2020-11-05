@@ -39,12 +39,13 @@ class Participante
     /**
      * @var Competencia
      *
-     * @ORM\ManyToOne(targetEntity="Competencia")
+     *
+     * @ORM\ManyToOne(targetEntity="Competencia", inversedBy= "listaParticipantes")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="competencia_id", referencedColumnName="id", nullable=false)
      * })
-     *
      */
+
     private $competenciaId;
 
 

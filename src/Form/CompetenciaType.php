@@ -33,7 +33,7 @@ class CompetenciaType extends AbstractType{
         $builder
             ->add('nombre')
             ->add('reglamento')
-            ->add('permiteEmpate',null, ['empty_data' => false])
+            ->add('permiteEmpate')//,null, ['empty_data' => false])
             ->add('ptosGanado')
             ->add('ptosEmpate')
             ->add('ptosPresentacion')
@@ -63,29 +63,123 @@ class CompetenciaType extends AbstractType{
             'constraints' =>[
                 new Callback(function(Competencia $data, ExecutionContextInterface $context)
                 {
+
                     /**
-                     * -nombre_competencia unico -> UniqueEntity
-                     * -cantidad_set -> impar y <10
-                     * -ptos_ganado > ptos_empate
-                     * -ptos_presentacion < ptos_ganado
+                     * -nombre_competencia unico -> UniqueEntity.
+                    */
+
+                    /**
+                     * Validaciones respecto a la modalidad.
                      */
-                    if ($data->getTipoPuntuacionId()->getId()== 1 && ($data->getCantidadSets()%2 ==1 || $data->getCantidadSets() > 10)) {
-                        $context->buildViolation('Cantidad de Sets debe ser un número impar y menor a 10')
-                            ->atPath('cantidadSets')
-                            ->addViolation();
+                    switch ($data->getTipoCompetenciaId()->getId()){
+
+                        case TipoCompetencia::LIGA:
+
+                            /**
+                             * Liga:
+                             *
+                             * -ptosGanado
+                             * -PermiteEmpate
+                             * -ptosPresentarse
+                             * -ptos_ganado > ptos_empate
+                             * -ptos_presentacion < ptos_ganado
+                             *
+                             * -Validar que si permite_empate es true, ptos_empate sea !=null
+                             *
+                             */
+                            if (($data->getPtosGanado()==null) ||
+                                //($data->isPermiteEmpate()==null) || //TODO Creo que nunca entra por esa validación.
+                                ($data->getPtosPresentacion()==null)
+                            ) {
+                                $context->buildViolation('La competencia en modalidad Liga NO es válida. Revise los campos correspondientes a dicha modalidad.')
+                                    ->atPath('tipoCompetenciaId')
+                                    ->addViolation();
+                            }
+
+                            if ($data->isPermiteEmpate() && $data->getPtosEmpate()==null) {
+
+                                $context->buildViolation('Si se permite el empate como resultado, Puntos por Empate no puede tener valor nulo')
+                                    ->atPath('ptosEmpate')
+                                    ->addViolation();
+
+                            }
+
+                            if (!$data->isPermiteEmpate() && $data->getPtosEmpate()!=null) {
+                                $data->setPtosEmpate(null);
+                            }
+
+                            if ($data->getPtosEmpate()>=$data->getPtosGanado()) {
+                                $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Empate')
+                                    ->atPath('ptosEmpate')
+                                    ->addViolation();
+                            }
+
+                            if ($data->getPtosPresentacion() >= $data->getPtosGanado()){
+                                $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Presentarse')
+                                    ->atPath('ptosPresentacion')
+                                    ->addViolation();
+                            }
+
+                        break;
+
+                        case TipoCompetencia::ELIMINACION_SIMPLE:
+                        case TipoCompetencia::ELIMINACION_DOBLE:
+
+
+                            /**
+                             * Eliminación Simple o Doble:
+                             *
+                             * -tipoPuntuación:
+                             *     -sets
+                             *     -puntuacion -> ptosAusencia
+                             *
+                             * -Empate siempre debe ser false
+                             */
+                            if (($data->getPtosGanado()!=null) ||
+                                ($data->getPtosPresentacion()!=null) ||
+                                ($data->isPermiteEmpate()!=null && $data->isPermiteEmpate())
+                            ) {
+                                $context->buildViolation('La competencia en modalidad Eliminación Doble o Simple NO es válida. Revise los campos correspondientes a dicha modalidad.')
+                                    ->atPath('tipoCompetenciaId')
+                                    ->addViolation();
+                            }
+
+
+                        break;
+
                     }
 
-                    if ($data->getTipoCompetenciaId()->getId() == 1 && $data->getPtosEmpate()>=$data->getPtosGanado()) {
-                        $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Empate')
-                            ->atPath('ptosEmpate')
-                            ->addViolation();
+                    /**
+                     * Validación Respecto a los Campos de Puntuación
+                     * -cantidad_set -> impar y <10 si tipo_puntuación == Sets
+                     * -ptos_ausencia != nulo si tipo_puntuación == Puntuación
+                     *
+                     */
+
+                    switch ($data->getTipoPuntuacionId()->getId()){
+
+                        case TipoPuntuacion::SETS:
+
+                            if ($data->getCantidadSets()==null || $data->getCantidadSets()%2 ==1 || $data->getCantidadSets() > 10) {
+                                $context->buildViolation('Cantidad de Sets debe ser un número impar, mayor a 0 y menor a 10')
+                                    ->atPath('cantidadSets')
+                                    ->addViolation();
+                            }
+
+                        break;
+
+                        case TipoPuntuacion::PUNTUACION:
+                            if ($data->getPtosAusencia()==null) {
+                                $context->buildViolation('Puntos por Ausencia no puede tener valor nulo.')
+                                    ->atPath('ptosAusencia')
+                                    ->addViolation();
+                            }
+                        break;
+
                     }
 
-                    if ($data->getTipoCompetenciaId()->getId()== 1 && $data->getPtosPresentacion() >= $data->getPtosGanado()){
-                        $context->buildViolation('Puntos por Partido Ganado debe ser mayor que Puntos por Presentarse')
-                            ->atPath('ptosPresentacion')
-                            ->addViolation();
-                    }
+
+
                 })
             ]
         ])

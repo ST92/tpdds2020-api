@@ -169,7 +169,12 @@ class Competencia
     private $listaSedesCompetencia;
 
 
-
+    /**
+     *  @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Participante", mappedBy="competenciaId", cascade={"persist", "remove"})
+     */
+    private $listaParticipantes;
 
 
 
@@ -265,9 +270,9 @@ class Competencia
     }
 
     /**
-     * @param int $ptosEmpate
+     * @param $ptosEmpate
      */
-    public function setPtosEmpate(int $ptosEmpate)
+    public function setPtosEmpate($ptosEmpate)
     {
         $this->ptosEmpate = $ptosEmpate;
     }
@@ -433,12 +438,27 @@ class Competencia
     }
 
 
-
     /**
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getListaParticipantes()
+    {
+        return $this->listaParticipantes;
+    }
+
+    /**
+     * @param ArrayCollection $listaParticipantes
+     */
+    public function setListaParticipantes(ArrayCollection $listaParticipantes)
+    {
+        $this->listaParticipantes = $listaParticipantes;
     }
 
 
