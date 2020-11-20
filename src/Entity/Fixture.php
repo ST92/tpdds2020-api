@@ -29,6 +29,8 @@ class Fixture
      */
     private $competencia;
 
+    //TODO Falta agregar la asociación de Ronda-Fixture
+
 
 
 }
