@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Fixture
  *
  * @ORM\Table(name="fixture")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\FixtureRepository")
  */
 class Fixture
 {

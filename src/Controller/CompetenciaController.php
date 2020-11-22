@@ -62,6 +62,60 @@ class CompetenciaController extends FOSRestController
 
 
 
+    /** CU20 - VER COMPETENCIA
+    */
+    /**
+     * Retorna una competencia dado un ID específico
+     *
+     * @param Competencia $competencia
+     * @return Competencia
+     * @View()
+     */
+    public function getAction(Competencia $competencia){
+
+        return $competencia;
+
+    }
+
+
+
+
+
+    /** VALIDACIONES DE COMPETENCIA PARA EL FRONT*/
+
+    /**
+     * Retorna una competencia dado un ID específico
+     *
+     * @param Request $request
+     * @return Competencia|array
+     * @View()
+     */
+    public function esnombreunicoAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+
+
+        /* @var Competencia $competencia*/
+        $competencia = $em->getRepository(Competencia::class)->findOneByNombre($request->query->get('nombre'));
+
+        //TODO Consultar como se prueba esto.
+        if ($competencia) {
+
+            if ($competencia->getId() == $request->query->get('id')) { // SE COMPARA ASI MISMO
+                return ['unico' => true];
+            }
+            return ['unico' => false];
+        }
+        return ['unico' => true];
+    }
+
+
+
+
+
+
+
+    /** LISTAS DESPLEGABLES */
     /**
      * Devuelve los tipos de competencia ordenados alfabeticamente
      *
