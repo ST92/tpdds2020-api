@@ -26,7 +26,39 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class ParticipanteController extends FOSRestController{
 
     /**
-     * Crear nuevo participante
+     * CU008 - Listar Participantes
+     *
+     * @param ParamFetcherInterface $paramFetcher
+     *
+     * @View()
+     *
+     * @QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing notes.")
+     * @QueryParam(name="limit", requirements="\d+", default="100", description="How many notes to return.")
+     * @QueryParam(name="order_by", nullable=true, description="Order by fields. Must be an array ie. &order_by[name]=ASC&order_by[description]=DESC")
+     * @QueryParam(name="filters", nullable=true, description="Filter by fields. Must be an array ie. &filters[id]=3")
+     * @QueryParam(name="operators", nullable=true, description="Operator by fields. Must be an array ie. &operators[id]=>")
+     *
+     * @return array
+     *
+     */
+    public function cgetAction(ParamFetcherInterface $paramFetcher)
+    {
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
+        $order_by = !is_null($paramFetcher->get('order_by')) ? $paramFetcher->get('order_by') : array();
+        $filters = !is_null($paramFetcher->get('filters')) ? $paramFetcher->get('filters') : array();
+        $operators = !is_null($paramFetcher->get('filters')) ? $paramFetcher->get('operators') : array();
+
+        $em = $this->getDoctrine()->getManager();
+
+        return [
+            'items' => $em->getRepository(Participante::class)->findByGrid($filters, $operators, $order_by, $limit, $offset),
+        ];
+    }
+
+
+    /**
+     * CU009 - Alta de Participante
      *
      * @param Request $request
      * @return FormInterface|Participante
@@ -52,13 +84,13 @@ class ParticipanteController extends FOSRestController{
 
                 $participanteRepository->persistAndFlush($participante);
 
-                //TODO Agregar acá validación por email existente.
+                //TODO Agregar acá validación por email existente. y lo de nombre
 
                 return $participante;
 
             }
 
-            return null; //TODO Ver esto. Diagrama de secuencias arroja excepción
+            throw $this->createNotFoundException('No se pudo dar de alta al participante. La competencia ha finalidado o ya está en disputa'); //TODO Ver esto. Diagrama de secuencias arroja excepción
 
         }
 
@@ -68,60 +100,8 @@ class ParticipanteController extends FOSRestController{
 
 
 
-    /** VALIDACIONES DE PARTICIPANTE PARA EL FRONT*/
-
-    /**
-     * Valida que el nombre sea único
-     *
-     * @param Request $request
-     * @return Participante|array
-     * @View()
-     */
-    public function esnombreunicoAction(Request $request){
-
-        $em = $this->getDoctrine()->getManager();
 
 
-        /* @var Participante $participante*/
-        $participante = $em->getRepository(Participante::class)->findOneByNombre($request->query->get('nombre'));
-
-        //TODO Consultar como se prueba esto.
-        if ($participante) {
-
-            if ($participante->getId() == $request->query->get('id')) { // SE COMPARA ASI MISMO
-                return ['unico' => true];
-            }
-            return ['unico' => false];
-        }
-        return ['unico' => true];
-    }
-
-
-    /**
-     * Valida que el email sea único
-     *
-     * @param Request $request
-     * @return Participante|array
-     * @View()
-     */
-    public function esemailunicoAction(Request $request){
-
-        $em = $this->getDoctrine()->getManager();
-
-
-        /* @var Participante $participante*/
-        $participante = $em->getRepository(Participante::class)->findOneByEmail($request->query->get('email'));
-
-        //TODO Consultar como se prueba esto.
-        if ($participante) {
-
-            if ($participante->getId() == $request->query->get('id')) { // SE COMPARA ASI MISMO
-                return ['unico' => true];
-            }
-            return ['unico' => false];
-        }
-        return ['unico' => true];
-    }
 
 
 }

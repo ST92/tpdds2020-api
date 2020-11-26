@@ -84,8 +84,10 @@ class CompetenciaRepository extends ServiceEntityRepository {
                     $joinWithArray[] = 'JOIN c.estadoCompetenciaId ec ';
                     HelperFilter::makeId('ec', 'id', $valor, $operators, $filterArray, $paramsArray);
                     break;
-
-
+                case 'usuarioId.id';
+                    $joinWithArray[] = 'JOIN c.usuarioId u ';
+                    HelperFilter::makeId('u', 'id', $valor, $operators, $filterArray, $paramsArray);
+                    break;
 
             }
         }
@@ -118,6 +120,12 @@ class CompetenciaRepository extends ServiceEntityRepository {
                     }
                     $orderByArray[] = 'ec.id ' . $direccion;
                     break;
+                case 'usuarioId.id';
+                    if (!in_array('JOIN c.usuarioId u ', $joinWithArray)) {
+                        $joinWithArray[] = 'JOIN c.usuarioId u ';
+                    }
+                    $orderByArray[] = 'u.id ' . $direccion;
+                    break;
             }
         }
 
@@ -138,7 +146,7 @@ class CompetenciaRepository extends ServiceEntityRepository {
 
         $query = $this->getEntityManager()
             ->createQuery(
-                "SELECT u FROM App:Competencia c $joinWithStr $where $orderByStr"
+                "SELECT c FROM App:Competencia c $joinWithStr $where $orderByStr"
             )
             ->setParameters($paramsArray)
             ->setMaxResults($limit)

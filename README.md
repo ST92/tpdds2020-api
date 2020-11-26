@@ -27,3 +27,18 @@ Sobre UniqueEntity Constraint sobre la entidad Competencia del campo nombre.
 #Enlaces usados:
 	https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/association-mapping.html 
 	https://jmsyst.com/libs/serializer/master/cookbook/exclusion_strategies
+	
+#Cosas Pendientes por Hacer:
+    Probar CU008
+    
+    Terminar validaciones de CU009
+    
+    Terminar validaciones de CU004
+    
+    Corregir métodos de validaciones Unicas. Aunque creo que no van al final
+    
+    Implementar los countbygrid si es necesario
+       
+    Implementar método de CU017.
+    
+    Probar CU017
