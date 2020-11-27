@@ -148,6 +148,7 @@ class Competencia
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="fixture_id", referencedColumnName="id", nullable=true)
      * })
+     *
      */
     private $fixtureId;
 
