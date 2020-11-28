@@ -15,8 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-use Symfony\Component\Form\Extension\Core\Type;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 class ParticipanteType extends AbstractType{
 
@@ -26,13 +25,7 @@ class ParticipanteType extends AbstractType{
 
         $builder
             ->add('nombre')
-            ->add('email', Type\EmailType::class,[
-                'label' => 'Email',
-                'constraints' =>[
-                    new Assert\Email([
-                        'message'=>'El formato del email no es correcto. Ingrese un email válido'
-                    ])
-                ]])
+            ->add('email')
             ->add($builder->create('competenciaId', TextType::class)->addModelTransformer($competenciaTransformer));
     }
 
@@ -44,6 +37,19 @@ class ParticipanteType extends AbstractType{
             'csrf_protection' => false,
             'allow_extra_fields' => true,
             'em' => null,
+            'constraints' =>[
+                new Callback(function(Participante $data, ExecutionContextInterface $context)
+                {
+
+                    $Sintaxis='#^[a-zA-z]+[\w.-]+@[\w.-]+\.[a-zA-Z]{2,20}$#';
+                    if(!preg_match($Sintaxis,$data->getEmail())){
+
+                        $context->buildViolation('El email ingresado no posee una estructura válida. Ingrese de nuevo el email.')
+                            ->atPath('email')
+                            ->addViolation();
+
+                    }
+                })]
         ])
             ->setRequired('em');
     }
