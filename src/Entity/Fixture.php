@@ -37,11 +37,21 @@ class Fixture
      */
     private $listaRondas;
 
-    //TODO Falta la asociación con lista de ronda para perdedores
+    /**
+     *  @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Ronda", mappedBy="fixturePerdedoresId", cascade={"persist", "remove"})
+     */
+    private $listaRondasPerdedores;
+
+
+
+
+
 
     /**
      * Fixture constructor.
-     * @param ArrayCollection $listaRondas
+     *
      */
     public function __construct()
     {
@@ -83,7 +93,7 @@ class Fixture
     /**
      * @return ArrayCollection
      */
-    public function getListaRondas(): ArrayCollection
+    public function getListaRondas()
     {
         return $this->listaRondas;
     }
@@ -95,6 +105,7 @@ class Fixture
     {
         $this->listaRondas = $listaRondas;
     }
+
 
 
 

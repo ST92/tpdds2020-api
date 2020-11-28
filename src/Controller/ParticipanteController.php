@@ -84,8 +84,6 @@ class ParticipanteController extends FOSRestController{
 
                 $participanteRepository->persistAndFlush($participante);
 
-                //TODO Agregar acá validación por email existente. y lo de nombre
-
                 return $participante;
 
             }

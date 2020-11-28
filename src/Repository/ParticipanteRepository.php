@@ -52,7 +52,7 @@ class ParticipanteRepository extends ServiceEntityRepository {
                 case 'email';
                     HelperFilter::makeString('p', $campo, $valor, $operators, $filterArray, $paramsArray);
                     break;
-                case 'competenciaId.id';
+                case 'competenciaId';
                     $joinWithArray[] = 'JOIN p.competenciaId c ';
                     HelperFilter::makeId('c', 'id', $valor, $operators, $filterArray, $paramsArray);
                     break;
@@ -72,7 +72,7 @@ class ParticipanteRepository extends ServiceEntityRepository {
                 case 'email';
                     $orderByArray[] = 'p.email ' . $direccion;
                     break;
-                case 'competenciaId.id';
+                case 'competenciaId';
                     if (!in_array('JOIN p.competenciaId c ', $joinWithArray)) {
                         $joinWithArray[] = 'JOIN p.competenciaId c ';
                     }
@@ -108,39 +108,6 @@ class ParticipanteRepository extends ServiceEntityRepository {
         return $query->getResult();
     }
 
-
-    /**
-     * @param $nombre
-     * @return mixed
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function findOneByNombre($nombre)
-    {
-        $query = $this->getEntityManager()
-            ->createQuery(
-                "SELECT p FROM App:Participante p WHERE p.nombre = :nombre "
-            );
-        $query->setParameters(['nombre' => $nombre]);
-
-        return $query->getOneOrNullResult();
-    }
-
-
-    /**
-     * @param $email
-     * @return mixed
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function findOneByEmail($email)
-    {
-        $query = $this->getEntityManager()
-            ->createQuery(
-                "SELECT p FROM App:Participante p WHERE p.email = :email "
-            );
-        $query->setParameters(['email' => $email]);
-
-        return $query->getOneOrNullResult();
-    }
 
 
 

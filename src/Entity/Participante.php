@@ -14,8 +14,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @UniqueEntity(
  *     fields={"nombre"},
- *     message="El nombre de participante ya existe"
+ *     message="El nombre de participante ingresado ya existe."
  * )
+ * @UniqueEntity(fields="email", message="El email ingresado ya está asociado a otro participante.")
  */
 class Participante
 {

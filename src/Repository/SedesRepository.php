@@ -50,8 +50,11 @@ class SedesRepository extends ServiceEntityRepository
                     HelperFilter::makeId('u', 'id', $valor, $operators, $filterArray, $paramsArray);
                     break;
                 case 'deporte.id';
-                    $joinWithArray[] = 'JOIN s.deporte d ';
-                    HelperFilter::makeId('d', 'id', $valor, $operators, $filterArray, $paramsArray);
+                //TODO Esto no anda
+                    $joinWithArray[] = 'INNER JOIN App:Deporte d ';
+                    $filterArray[] = 'd.id IN (:' . 's.listaDeportes)';
+                    $paramsArray['d.id'] = $valor;
+                    //HelperFilter::makeId('d', 'id', $valor, $operators, $filterArray, $paramsArray);
                     break;
             }
         }

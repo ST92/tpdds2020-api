@@ -27,21 +27,21 @@ class Encuentro
      *
      * @ORM\Column(name="encuentro_empatado", type="boolean", nullable=false)
      */
-    private $encuentroEmpatado;
+    private $encuentroEmpatado=false;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="asistencia_participante_1", type="boolean", nullable=false)
      */
-    private $asistenciaParticipante1;
+    private $asistenciaParticipante1=false;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="asistencia_participante_2", type="boolean", nullable=false)
      */
-    private $asistenciaParticipante2;
+    private $asistenciaParticipante2=false;
 
 
     /**
@@ -89,7 +89,7 @@ class Encuentro
     /**
      * @var Ronda
      *
-     * @ORM\ManyToOne(targetEntity="Ronda")
+     * @ORM\ManyToOne(targetEntity="Ronda", inversedBy= "listaEncuentros")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ronda_id", referencedColumnName="id", nullable=false)
      * })
@@ -123,6 +123,11 @@ class Encuentro
      * @ORM\OneToMany(targetEntity="Resultado", mappedBy="encuentroId", cascade={"persist", "remove"})
      */
     private $listaResultados;
+
+
+
+
+
 
     /**
      * Encuentro constructor.
@@ -313,7 +318,7 @@ class Encuentro
     /**
      * @return ArrayCollection
      */
-    public function getListaResultados(): ArrayCollection
+    public function getListaResultados()
     {
         return $this->listaResultados;
     }

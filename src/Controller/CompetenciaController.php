@@ -61,7 +61,7 @@ class CompetenciaController extends FOSRestController
 
             return $competencia;
         }
-        //TODO Ver el tema de los errores
+
         return $objForm;
     }
 
@@ -93,7 +93,6 @@ class CompetenciaController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        //TODO Consultar si va a necesitar el countbygrid o no.
         return [
             'items' => $em->getRepository(Competencia::class)->findByGrid($filters, $operators, $order_by, $limit, $offset),
         ];

@@ -88,7 +88,7 @@ class CompetenciaType extends AbstractType{
                              *
                              */
                             if (($data->getPtosGanado()==null) ||
-                                //($data->isPermiteEmpate()==null) || //TODO Creo que nunca entra por esa validación.
+                                ($data->isPermiteEmpate()==null) ||
                                 ($data->getPtosPresentacion()==null)
                             ) {
                                 $context->buildViolation('La competencia en modalidad Liga NO es válida. Revise los campos correspondientes a dicha modalidad.')

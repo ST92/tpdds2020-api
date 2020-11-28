@@ -32,21 +32,28 @@ class Ronda
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha", type="date", nullable=false)
+     * @ORM\Column(name="fecha", type="date", nullable=true)
      */
     private $fecha;
 
     /**
-     * @var int
+     * @var Fixture
      *
-     * @ORM\Column(name="fixture_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Fixture", inversedBy= "listaRondas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fixture_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $fixtureId;
 
     /**
-     * @var int
+     * @var Fixture
      *
-     * @ORM\Column(name="fixture_perdedores_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Fixture", inversedBy= "listaRondasPerdedores")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fixture_perdedores_id", referencedColumnName="id", nullable=true)
+     * })
+     *
      */
     private $fixturePerdedoresId;
 
@@ -57,9 +64,11 @@ class Ronda
      */
     private $listaEncuentros;
 
+
+
+
     /**
      * Ronda constructor.
-     * @param ArrayCollection $listaEncuentros
      */
     public function __construct()
     {
@@ -116,33 +125,33 @@ class Ronda
     }
 
     /**
-     * @return int
+     * @return Fixture
      */
-    public function getFixtureId(): int
+    public function getFixtureId()
     {
         return $this->fixtureId;
     }
 
     /**
-     * @param int $fixtureId
+     * @param Fixture $fixtureId
      */
-    public function setFixtureId(int $fixtureId): void
+    public function setFixtureId($fixtureId)
     {
         $this->fixtureId = $fixtureId;
     }
 
     /**
-     * @return int
+     * @return Fixture
      */
-    public function getFixturePerdedoresId(): int
+    public function getFixturePerdedoresId()
     {
         return $this->fixturePerdedoresId;
     }
 
     /**
-     * @param int $fixturePerdedoresId
+     * @param $fixturePerdedoresId
      */
-    public function setFixturePerdedoresId(int $fixturePerdedoresId): void
+    public function setFixturePerdedoresId($fixturePerdedoresId): void
     {
         $this->fixturePerdedoresId = $fixturePerdedoresId;
     }
@@ -150,7 +159,7 @@ class Ronda
     /**
      * @return ArrayCollection
      */
-    public function getListaEncuentros(): ArrayCollection
+    public function getListaEncuentros()
     {
         return $this->listaEncuentros;
     }
