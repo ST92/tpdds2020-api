@@ -17,9 +17,10 @@ INSERT INTO tipopuntuacion (id, nombre) VALUES (1, 'SETS');
 INSERT INTO tipopuntuacion (id, nombre) VALUES (2, 'PUNTUACION');
 INSERT INTO tipopuntuacion (id, nombre) VALUES (3, 'RESULTADO_FINAL');
 
-INSERT INTO deporte (id, nombre) VALUES (1, 'football');
+INSERT INTO deporte (id, nombre) VALUES (1, 'fútbol');
 INSERT INTO deporte (id, nombre) VALUES (2, 'basquet');
 INSERT INTO deporte (id, nombre) VALUES (3, 'tenis');
+INSERT INTO deporte (id, nombre) VALUES (4, 'rugby');
 
 INSERT INTO sedes (id, codigo, nombre, descripcion, usuario_id, fecha_borrado) 
 	VALUES (1, 1, 'Rafael Osinalde', 'Cancha de futball', 1,null);

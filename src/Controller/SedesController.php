@@ -48,7 +48,7 @@ class SedesController extends FOSRestController
      *
      *
      */
-    public function cgetAction(ParamFetcherInterface $paramFetcher)
+    private function cgetAction(ParamFetcherInterface $paramFetcher)
     {
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
@@ -101,7 +101,7 @@ class SedesController extends FOSRestController
      *
      * @View()
      */
-    public function getpruebaSedesAction($idUsuario, $idDeporte){
+    public function getSedespordeporteAction($idUsuario, $idDeporte){
 
         $em = $this->getDoctrine()->getManager();
 

@@ -70,7 +70,7 @@ class Sedes
      * @ORM\JoinTable(name="sedesdeporte",
      *     joinColumns={@ORM\JoinColumn(name="sedes_id", referencedColumnName = "id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="deporte_id", referencedColumnName = "id")})
-     *
+     * @Exclude()
      */
     private $listaDeportes;
 

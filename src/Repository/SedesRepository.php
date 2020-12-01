@@ -179,9 +179,9 @@ class SedesRepository extends ServiceEntityRepository
             'INNER JOIN deporte d ON sd.deporte_id = d.id '.
             'WHERE s.usuario_id = ?';*/
 
-        $sql = 'SELECT * FROM sedes s ' .
-            'JOIN sedesdeporte sd ON s.id = sd.sedes_id '.
-            'JOIN deporte d ON sd.deporte_id = ? '.
+        $sql = 'SELECT s.id, s.codigo, s.descripcion, s.nombre FROM sedes s ' .
+            'INNER JOIN sedesdeporte sd ON s.id = sd.sedes_id '.
+            'INNER JOIN deporte d ON sd.deporte_id = ? '.
             'WHERE s.usuario_id = ?';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
