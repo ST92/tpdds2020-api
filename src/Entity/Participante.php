@@ -51,8 +51,8 @@ class Participante
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="competencia_id", referencedColumnName="id", nullable=false)
      * })
+     *
      */
-
     private $competenciaId;
 
     /**

@@ -65,16 +65,22 @@ class Usuario
     private $confirmacionTerminos;
 
     /**
-     * @var int
+     * @var Localidad
      *
-     * @ORM\Column(name="localidad_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Localidad")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="localidad_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $localidadId;
 
     /**
-     * @var int
+     * @var TipoDocumento
      *
-     * @ORM\Column(name="tipo_documento_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="TipoDocumento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipo_documento_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $tipoDocumentoId;
 

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +28,15 @@ class Pais
      * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
      */
     private $nombre;
+
+
+    /**
+     *  @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Provincia", mappedBy="paisId", cascade={"persist", "remove"})
+     *
+     */
+    private $listaProvincias;
 
 
 }

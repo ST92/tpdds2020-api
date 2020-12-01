@@ -68,6 +68,13 @@ class CompetenciaType extends AbstractType{
                      * -nombre_competencia unico -> UniqueEntity.
                     */
 
+                    if(count($data->getListaSedesCompetencia())<1){
+
+                        $context->buildViolation('Se requiere cargar al menos una sede para la competencia. ')
+                            ->atPath('listaSedesCompetencia')
+                            ->addViolation();
+                    }
+
                     /**
                      * Validaciones respecto a la modalidad.
                      */

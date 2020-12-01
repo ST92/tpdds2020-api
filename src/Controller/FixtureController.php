@@ -37,7 +37,7 @@ class FixtureController extends FOSRestController{
             $sedes = $competencia->getListaSedesCompetencia();
 
             //Fixture para cantidad de participantes PAR
-            if($listaParticipantes->count() >0 && $listaParticipantes->count()%2==0){
+            if($listaParticipantes->count() >1 && $listaParticipantes->count()%2==0){
 
                 $disponibilidadTotal = $this->calcularDisponibilidadTotal($sedes);
                 $cantidadEncuentrosPorRonda = $listaParticipantes->count()/2;
@@ -57,7 +57,7 @@ class FixtureController extends FOSRestController{
             }else{
 
                 //Fixture para cantidad de participantes IMPAR
-                if($listaParticipantes->count() >0 && $listaParticipantes->count()%2!=0){
+                if($listaParticipantes->count() >1 && $listaParticipantes->count()%2!=0){
 
                     $disponibilidadTotal = $this->calcularDisponibilidadTotal($sedes);
                     $cantidadEncuentrosPorRonda = floor($listaParticipantes->count()/2);
@@ -76,7 +76,7 @@ class FixtureController extends FOSRestController{
                 }else{
 
                     //No hay participantes
-                    throw $this->createNotFoundException('No se pudo generar el Fixture. La competencia no posee partipantes');
+                    throw $this->createNotFoundException('No se pudo generar el Fixture. La competencia requiere de al menos 2 participantes registrados');
 
                 }
 

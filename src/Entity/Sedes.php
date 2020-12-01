@@ -49,6 +49,7 @@ class Sedes
      * @var DateTime
      *
      * @ORM\Column(name="fecha_borrado",type="date", nullable=true)
+     * @Exclude()
      */
     private $fechaBorrado;
 

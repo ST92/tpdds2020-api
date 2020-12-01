@@ -28,10 +28,15 @@ class Localidad
      */
     private $nombre;
 
+
     /**
-     * @var int
+     * @var Provincia
      *
-     * @ORM\Column(name="provincia_id", type="integer", nullable=false)
+     *
+     * @ORM\ManyToOne(targetEntity="Provincia", inversedBy= "listaLocalidades")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", nullable=false)
+     * })
      */
     private $provinciaId;
 

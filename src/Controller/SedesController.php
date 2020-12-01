@@ -92,5 +92,21 @@ class SedesController extends FOSRestController
         return $sedes;
     }
 
+    /**
+     * Devuelve una sede específica
+     *
+     * @param $idUsuario
+     * @param $idDeporte
+     * @return array
+     *
+     * @View()
+     */
+    public function getpruebaSedesAction($idUsuario, $idDeporte){
 
+        $em = $this->getDoctrine()->getManager();
+
+        return [
+            'sedes' => $em->getRepository(Sedes::class)->findSedesPorDeporte($idUsuario, $idDeporte),
+        ];
+    }
 }

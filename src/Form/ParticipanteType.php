@@ -42,6 +42,7 @@ class ParticipanteType extends AbstractType{
                 {
 
                     $Sintaxis='#^[a-zA-z]+[\w.-]+@[\w.-]+\.[a-zA-Z]{2,20}$#';
+                    //$Sintaxis='#^[a-zA-z]+[a-zA-z0-9.-]+@[\w.-]+\.[a-zA-Z]{2,20}$#';
                     if(!preg_match($Sintaxis,$data->getEmail())){
 
                         $context->buildViolation('El email ingresado no posee una estructura válida. Ingrese de nuevo el email.')

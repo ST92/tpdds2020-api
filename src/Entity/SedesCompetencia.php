@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * SedesCompetencia
@@ -35,6 +36,8 @@ class SedesCompetencia
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="competencia_id", referencedColumnName="id", nullable=false)
      * })
+     * @Exclude()
+     *
      */
     private $competenciaId;
 

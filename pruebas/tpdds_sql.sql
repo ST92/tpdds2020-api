@@ -45,4 +45,12 @@ INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (4, 1);
 
 INSERT INTO estadocompetencia (id,nombre)
 	VALUES(1,'CREADA')
-	
+
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (1, 0, 2, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (2, 3, 0, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (3, 0, 0, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (4, 1, 1, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (5, 0, 1, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (6, 1, 3, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (7, 2, 1, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (8, 3, 0, 0);

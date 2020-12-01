@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Fixture
@@ -26,7 +27,7 @@ class Fixture
      * @var Competencia
      *
      * @ORM\OneToOne(targetEntity="Competencia", mappedBy="fixtureId")
-     *
+     * @Exclude()
      */
     private $competencia;
 
@@ -41,6 +42,7 @@ class Fixture
      *  @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Ronda", mappedBy="fixturePerdedoresId", cascade={"persist", "remove"})
+     *
      */
     private $listaRondasPerdedores;
 
