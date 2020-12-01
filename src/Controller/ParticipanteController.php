@@ -82,6 +82,8 @@ class ParticipanteController extends FOSRestController{
 
             if($estadoCompetencia->getId()==EstadoCompetencia::CREADA || $estadoCompetencia->getId()==EstadoCompetencia::PLANIFICADA){
 
+                //Vuelve al Estado Creada. TODO Verificar que funciona
+                $participante->getCompetenciaId()->setEstadoCompetenciaId($em->getReference(EstadoCompetencia::class,EstadoCompetencia::CREADA));
                 $participanteRepository->persistAndFlush($participante);
 
                 return $participante;

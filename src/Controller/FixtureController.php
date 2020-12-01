@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Competencia;
 use App\Entity\Encuentro;
+use App\Entity\EstadoCompetencia;
 use App\Entity\Fixture;
 use App\Entity\Ronda;
 use App\Entity\Sedes;
@@ -87,6 +88,7 @@ class FixtureController extends FOSRestController{
             $fixture = $this->armadoFixture($encuentros, $sedes, $cantidadRondas, $cantidadEncuentrosPorRonda);
 
             $competencia->setFixtureId($fixture);
+            $competencia->setEstadoCompetenciaId($em->getReference(EstadoCompetencia::class,EstadoCompetencia::PLANIFICADA));
 
             $fixtureRepository->persistAndFlush($fixture);
 

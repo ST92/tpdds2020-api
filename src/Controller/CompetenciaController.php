@@ -46,7 +46,7 @@ class CompetenciaController extends FOSRestController
 
         $competenciaRepository = $em->getRepository(Competencia::class);
 
-        $competencia->setEstadoCompetenciaId($em->getReference(EstadoCompetencia::class,1));
+        $competencia->setEstadoCompetenciaId($em->getReference(EstadoCompetencia::class,EstadoCompetencia::CREADA));
 
         $objForm = $this->createForm(CompetenciaType::class, $competencia, ['em' => $em]);
         $objForm->handleRequest($request);
