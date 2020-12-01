@@ -34,6 +34,7 @@ class SedesRepository extends ServiceEntityRepository
      *
      * @return array
      */
+    //TODO Eliminar si el otro funciona bien
     public function findByGrid($filters, $operators, $order_by, $limit, $offset)
     {
         // armo los filtros
@@ -51,7 +52,6 @@ class SedesRepository extends ServiceEntityRepository
                     HelperFilter::makeId('u', 'id', $valor, $operators, $filterArray, $paramsArray);
                     break;
                 case 'deporte.id';
-                //TODO Esto no anda
                     $joinWithArray[] = 'INNER JOIN App:Deporte d ';
                     $filterArray[] = 'd.id IN (:' . 's.listaDeportes)';
                     $paramsArray['d.id'] = $valor;

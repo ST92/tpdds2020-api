@@ -49,7 +49,7 @@ class FixtureController extends FOSRestController{
                     throw $this->createNotFoundException('No se pudo generar el Fixture. La disponibilidad total de sedes no es suficiente.');
                 }
 
-                //TODO Controlar esto
+
                 $encuentros[$cantidadRondas][$cantidadEncuentrosPorRonda] = new Encuentro();
 
                 $this->generarFixtureNroPar($encuentros, $cantidadRondas,$cantidadEncuentrosPorRonda, $listaParticipantes);
@@ -69,7 +69,7 @@ class FixtureController extends FOSRestController{
                         throw $this->createNotFoundException('No se pudo generar el Fixture. La disponibilidad total de sedes no es suficiente.');
                     }
 
-                    //TODO Controlar esto
+
                     $encuentros[$cantidadRondas][$cantidadEncuentrosPorRonda] = new Encuentro();
 
                     $this->generarFixtureNroImpar($encuentros, $cantidadRondas,$cantidadEncuentrosPorRonda, $listaParticipantes);
@@ -169,7 +169,6 @@ class FixtureController extends FOSRestController{
      * @param $listaParticipantes
      * @return void
      */
-    //TODO Esto no anda, corregir.
     private function generarFixtureNroImpar(&$encuentros, $cantidadRondas, $cantidadEncuentrosPorRonda, $listaParticipantes){
 
         for ($i=0, $k=0; $i<$cantidadRondas; $i++){
@@ -225,7 +224,6 @@ class FixtureController extends FOSRestController{
 
             $ronda = new Ronda();
             $ronda->setNumero($i);
-            //$ronda->setFecha($fecha); TODO Corregir esto
 
             for($j=0; $j<$cantidadEncuentrosPorRonda; $j++){
 
@@ -268,7 +266,6 @@ class FixtureController extends FOSRestController{
      * @return int
      * @View()
      */
-    //TODO Probar luego de cargar las tablas
     public function getproximosencuentrosAction(Competencia $competencia){
 
         /*
@@ -307,7 +304,7 @@ class FixtureController extends FOSRestController{
                     $encontrado=true;
                 }
 
-                $j++; //TODO Ver si no impacta en $nroEncuentro
+                $j++;
 
             }
 
@@ -315,7 +312,6 @@ class FixtureController extends FOSRestController{
 
         }
 
-        //TODO Revisar por las dudas.
         return $listaRondas->get($nroRondaPendiente)->getListaEncuentros()->count() - $nroEncuentro;
 
     }
