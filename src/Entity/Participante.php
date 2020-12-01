@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Finder\Tests\Comparator\ComparatorTest;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Participante
@@ -51,12 +52,12 @@ class Participante
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="competencia_id", referencedColumnName="id", nullable=false)
      * })
-     *
+     * @Exclude()
      */
     private $competenciaId;
 
     /**
-     * @return
+     * @return int
      */
     public function getId()
     {

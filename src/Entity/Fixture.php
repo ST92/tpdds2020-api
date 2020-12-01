@@ -63,7 +63,7 @@ class Fixture
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -71,7 +71,7 @@ class Fixture
     /**
      * @param int $id
      */
-    public function setId(int $id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -79,7 +79,7 @@ class Fixture
     /**
      * @return Competencia
      */
-    public function getCompetencia(): Competencia
+    public function getCompetencia()
     {
         return $this->competencia;
     }
@@ -87,7 +87,7 @@ class Fixture
     /**
      * @param Competencia $competencia
      */
-    public function setCompetencia(Competencia $competencia): void
+    public function setCompetencia(Competencia $competencia)
     {
         $this->competencia = $competencia;
     }
@@ -103,7 +103,7 @@ class Fixture
     /**
      * @param ArrayCollection $listaRondas
      */
-    public function setListaRondas(ArrayCollection $listaRondas): void
+    public function setListaRondas(ArrayCollection $listaRondas)
     {
         $this->listaRondas = $listaRondas;
     }

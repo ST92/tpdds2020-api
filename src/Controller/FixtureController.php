@@ -220,7 +220,6 @@ class FixtureController extends FOSRestController{
 
         $fixture = new Fixture();
 
-        $fecha = $this->calcularFecha();
 
         for ($i=0; $i<$cantidadRondas; $i++){
 
@@ -258,10 +257,6 @@ class FixtureController extends FOSRestController{
 
     }
 
-
-    private function calcularFecha(){
-        //TODO Quitar del diagrama
-    }
 
 
     /**
@@ -323,6 +318,16 @@ class FixtureController extends FOSRestController{
         //TODO Revisar por las dudas.
         return $listaRondas->get($nroRondaPendiente)->getListaEncuentros()->count() - $nroEncuentro;
 
+    }
+
+    /**
+     * @param Fixture $fixture
+     * @return Fixture
+     * @View()
+     */
+    public function getAction(Fixture $fixture){
+
+        return $fixture;
     }
 
 }

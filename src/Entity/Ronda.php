@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Ronda
@@ -29,12 +30,6 @@ class Ronda
      */
     private $numero;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fecha", type="date", nullable=true)
-     */
-    private $fecha;
 
     /**
      * @var Fixture
@@ -43,6 +38,7 @@ class Ronda
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="fixture_id", referencedColumnName="id", nullable=false)
      * })
+     * @Exclude()
      */
     private $fixtureId;
 
@@ -53,6 +49,8 @@ class Ronda
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="fixture_perdedores_id", referencedColumnName="id", nullable=true)
      * })
+     *
+     * @Exclude()
      *
      */
     private $fixturePerdedoresId;
@@ -79,15 +77,15 @@ class Ronda
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * @param $id
      */
-    public function setId(int $id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -95,34 +93,19 @@ class Ronda
     /**
      * @return int
      */
-    public function getNumero(): int
+    public function getNumero()
     {
         return $this->numero;
     }
 
     /**
-     * @param int $numero
+     * @param $numero
      */
-    public function setNumero(int $numero): void
+    public function setNumero($numero)
     {
         $this->numero = $numero;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getFecha(): \DateTime
-    {
-        return $this->fecha;
-    }
-
-    /**
-     * @param \DateTime $fecha
-     */
-    public function setFecha(\DateTime $fecha): void
-    {
-        $this->fecha = $fecha;
-    }
 
     /**
      * @return Fixture
@@ -151,7 +134,7 @@ class Ronda
     /**
      * @param $fixturePerdedoresId
      */
-    public function setFixturePerdedoresId($fixturePerdedoresId): void
+    public function setFixturePerdedoresId($fixturePerdedoresId)
     {
         $this->fixturePerdedoresId = $fixturePerdedoresId;
     }
@@ -167,7 +150,7 @@ class Ronda
     /**
      * @param ArrayCollection $listaEncuentros
      */
-    public function setListaEncuentros(ArrayCollection $listaEncuentros): void
+    public function setListaEncuentros(ArrayCollection $listaEncuentros)
     {
         $this->listaEncuentros = $listaEncuentros;
     }

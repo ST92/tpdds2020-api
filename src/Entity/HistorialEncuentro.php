@@ -73,6 +73,8 @@ class HistorialEncuentro
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="encuentro_id", referencedColumnName="id", nullable=false)
      * })
+     *
+     *
      */
     private $encuentroId;
 
