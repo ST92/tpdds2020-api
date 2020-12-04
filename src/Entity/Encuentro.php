@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+use JMS\Serializer\Annotation\Exclude;
+
 /**
  * Encuentro
  *
@@ -27,21 +29,21 @@ class Encuentro
      *
      * @ORM\Column(name="encuentro_empatado", type="boolean", nullable=false)
      */
-    private $encuentroEmpatado;
+    private $encuentroEmpatado=false;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="asistencia_participante_1", type="boolean", nullable=false)
      */
-    private $asistenciaParticipante1;
+    private $asistenciaParticipante1=false;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="asistencia_participante_2", type="boolean", nullable=false)
      */
-    private $asistenciaParticipante2;
+    private $asistenciaParticipante2=false;
 
 
     /**
@@ -89,14 +91,17 @@ class Encuentro
     /**
      * @var Ronda
      *
-     * @ORM\ManyToOne(targetEntity="Ronda")
+     * @ORM\ManyToOne(targetEntity="Ronda", inversedBy= "listaEncuentros")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ronda_id", referencedColumnName="id", nullable=false)
      * })
+     *
+     * Porque encuentro iría dentro de la lista de rondas
+     * @Exclude()
+     *
      */
     private $rondaId;
 
-    //TODO Creo que esto sería unidireccional. Buscar una asociación consigo misma
     /**
      * @var Encuentro
      *
@@ -104,6 +109,7 @@ class Encuentro
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="encuentro_perdedor_id", referencedColumnName="id", nullable=true)
      * })
+     *
      */
     private $encuentroPerdedorId;
 
@@ -124,9 +130,11 @@ class Encuentro
      */
     private $listaResultados;
 
+
+
+
     /**
      * Encuentro constructor.
-     * @param ArrayCollection $listaResultados
      */
     public function __construct()
     {
@@ -137,7 +145,7 @@ class Encuentro
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -145,7 +153,7 @@ class Encuentro
     /**
      * @param int $id
      */
-    public function setId(int $id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -153,7 +161,7 @@ class Encuentro
     /**
      * @return bool
      */
-    public function isEncuentroEmpatado(): bool
+    public function isEncuentroEmpatado()
     {
         return $this->encuentroEmpatado;
     }
@@ -161,7 +169,7 @@ class Encuentro
     /**
      * @param bool $encuentroEmpatado
      */
-    public function setEncuentroEmpatado(bool $encuentroEmpatado): void
+    public function setEncuentroEmpatado(bool $encuentroEmpatado)
     {
         $this->encuentroEmpatado = $encuentroEmpatado;
     }
@@ -169,7 +177,7 @@ class Encuentro
     /**
      * @return bool
      */
-    public function isAsistenciaParticipante1(): bool
+    public function isAsistenciaParticipante1()
     {
         return $this->asistenciaParticipante1;
     }
@@ -177,7 +185,7 @@ class Encuentro
     /**
      * @param bool $asistenciaParticipante1
      */
-    public function setAsistenciaParticipante1(bool $asistenciaParticipante1): void
+    public function setAsistenciaParticipante1(bool $asistenciaParticipante1)
     {
         $this->asistenciaParticipante1 = $asistenciaParticipante1;
     }
@@ -185,7 +193,7 @@ class Encuentro
     /**
      * @return bool
      */
-    public function isAsistenciaParticipante2(): bool
+    public function isAsistenciaParticipante2()
     {
         return $this->asistenciaParticipante2;
     }
@@ -193,7 +201,7 @@ class Encuentro
     /**
      * @param bool $asistenciaParticipante2
      */
-    public function setAsistenciaParticipante2(bool $asistenciaParticipante2): void
+    public function setAsistenciaParticipante2(bool $asistenciaParticipante2)
     {
         $this->asistenciaParticipante2 = $asistenciaParticipante2;
     }
@@ -201,7 +209,7 @@ class Encuentro
     /**
      * @return Participante
      */
-    public function getParticipante1Id(): Participante
+    public function getParticipante1Id()
     {
         return $this->participante1Id;
     }
@@ -209,7 +217,7 @@ class Encuentro
     /**
      * @param Participante $participante1Id
      */
-    public function setParticipante1Id(Participante $participante1Id): void
+    public function setParticipante1Id(Participante $participante1Id)
     {
         $this->participante1Id = $participante1Id;
     }
@@ -217,7 +225,7 @@ class Encuentro
     /**
      * @return Participante
      */
-    public function getParticipante2Id(): Participante
+    public function getParticipante2Id()
     {
         return $this->participante2Id;
     }
@@ -225,7 +233,7 @@ class Encuentro
     /**
      * @param Participante $participante2Id
      */
-    public function setParticipante2Id(Participante $participante2Id): void
+    public function setParticipante2Id(Participante $participante2Id)
     {
         $this->participante2Id = $participante2Id;
     }
@@ -233,7 +241,7 @@ class Encuentro
     /**
      * @return Participante
      */
-    public function getGanadorId(): Participante
+    public function getGanadorId()
     {
         return $this->ganadorId;
     }
@@ -241,7 +249,7 @@ class Encuentro
     /**
      * @param Participante $ganadorId
      */
-    public function setGanadorId(Participante $ganadorId): void
+    public function setGanadorId(Participante $ganadorId)
     {
         $this->ganadorId = $ganadorId;
     }
@@ -249,7 +257,7 @@ class Encuentro
     /**
      * @return Sedes
      */
-    public function getSedesId(): Sedes
+    public function getSedesId()
     {
         return $this->sedesId;
     }
@@ -257,7 +265,7 @@ class Encuentro
     /**
      * @param Sedes $sedesId
      */
-    public function setSedesId(Sedes $sedesId): void
+    public function setSedesId(Sedes $sedesId)
     {
         $this->sedesId = $sedesId;
     }
@@ -265,7 +273,7 @@ class Encuentro
     /**
      * @return Ronda
      */
-    public function getRondaId(): Ronda
+    public function getRondaId()
     {
         return $this->rondaId;
     }
@@ -273,7 +281,7 @@ class Encuentro
     /**
      * @param Ronda $rondaId
      */
-    public function setRondaId(Ronda $rondaId): void
+    public function setRondaId(Ronda $rondaId)
     {
         $this->rondaId = $rondaId;
     }
@@ -281,7 +289,7 @@ class Encuentro
     /**
      * @return Encuentro
      */
-    public function getEncuentroPerdedorId(): Encuentro
+    public function getEncuentroPerdedorId()
     {
         return $this->encuentroPerdedorId;
     }
@@ -289,7 +297,7 @@ class Encuentro
     /**
      * @param Encuentro $encuentroPerdedorId
      */
-    public function setEncuentroPerdedorId(Encuentro $encuentroPerdedorId): void
+    public function setEncuentroPerdedorId(Encuentro $encuentroPerdedorId)
     {
         $this->encuentroPerdedorId = $encuentroPerdedorId;
     }
@@ -297,7 +305,7 @@ class Encuentro
     /**
      * @return Encuentro
      */
-    public function getEncuentroGanadorId(): Encuentro
+    public function getEncuentroGanadorId()
     {
         return $this->encuentroGanadorId;
     }
@@ -305,7 +313,7 @@ class Encuentro
     /**
      * @param Encuentro $encuentroGanadorId
      */
-    public function setEncuentroGanadorId(Encuentro $encuentroGanadorId): void
+    public function setEncuentroGanadorId(Encuentro $encuentroGanadorId)
     {
         $this->encuentroGanadorId = $encuentroGanadorId;
     }
@@ -313,7 +321,7 @@ class Encuentro
     /**
      * @return ArrayCollection
      */
-    public function getListaResultados(): ArrayCollection
+    public function getListaResultados()
     {
         return $this->listaResultados;
     }
@@ -321,7 +329,7 @@ class Encuentro
     /**
      * @param ArrayCollection $listaResultados
      */
-    public function setListaResultados(ArrayCollection $listaResultados): void
+    public function setListaResultados(ArrayCollection $listaResultados)
     {
         $this->listaResultados = $listaResultados;
     }

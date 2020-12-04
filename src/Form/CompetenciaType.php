@@ -68,6 +68,13 @@ class CompetenciaType extends AbstractType{
                      * -nombre_competencia unico -> UniqueEntity.
                     */
 
+                    if(count($data->getListaSedesCompetencia())<1){
+
+                        $context->buildViolation('Se requiere cargar al menos una sede para la competencia. ')
+                            ->atPath('listaSedesCompetencia')
+                            ->addViolation();
+                    }
+
                     /**
                      * Validaciones respecto a la modalidad.
                      */
@@ -88,7 +95,7 @@ class CompetenciaType extends AbstractType{
                              *
                              */
                             if (($data->getPtosGanado()==null) ||
-                                //($data->isPermiteEmpate()==null) || //TODO Creo que nunca entra por esa validación.
+                                ($data->isPermiteEmpate()==null) ||
                                 ($data->getPtosPresentacion()==null)
                             ) {
                                 $context->buildViolation('La competencia en modalidad Liga NO es válida. Revise los campos correspondientes a dicha modalidad.')

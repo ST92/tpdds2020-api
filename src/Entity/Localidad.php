@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Localidad
@@ -28,10 +29,16 @@ class Localidad
      */
     private $nombre;
 
+
     /**
-     * @var int
+     * @var Provincia
      *
-     * @ORM\Column(name="provincia_id", type="integer", nullable=false)
+     *
+     * @ORM\ManyToOne(targetEntity="Provincia", inversedBy= "listaLocalidades")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", nullable=false)
+     * })
+     * @Exclude()
      */
     private $provinciaId;
 

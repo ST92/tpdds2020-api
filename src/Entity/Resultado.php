@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Resultado
@@ -41,6 +42,8 @@ class Resultado
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="encuentro_id", referencedColumnName="id", nullable=false)
      * })
+     *
+     * @Exclude()
      */
     private $encuentroId;
 

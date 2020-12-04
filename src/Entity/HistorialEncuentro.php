@@ -6,6 +6,9 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+use JMS\Serializer\Annotation\Exclude;
+
+
 /**
  * HistorialEncuentro
  *
@@ -70,6 +73,8 @@ class HistorialEncuentro
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="encuentro_id", referencedColumnName="id", nullable=false)
      * })
+     *
+     *
      */
     private $encuentroId;
 

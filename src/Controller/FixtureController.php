@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Competencia;
 use App\Entity\Encuentro;
+use App\Entity\EstadoCompetencia;
 use App\Entity\Fixture;
 use App\Entity\Ronda;
 use App\Entity\Sedes;
@@ -31,15 +32,13 @@ class FixtureController extends FOSRestController{
         $em = $this->getDoctrine()->getManager();
         $fixtureRepository = $em->getRepository(Fixture::class);
 
-        //TODO Recordar que $competencia hace una llamada implicita al EM
-
         if($competencia!=null){
 
             $listaParticipantes = $competencia->getListaParticipantes();
             $sedes = $competencia->getListaSedesCompetencia();
 
             //Fixture para cantidad de participantes PAR
-            if($listaParticipantes->count() >0 && $listaParticipantes->count()%2==0){
+            if($listaParticipantes->count() >1 && $listaParticipantes->count()%2==0){
 
                 $disponibilidadTotal = $this->calcularDisponibilidadTotal($sedes);
                 $cantidadEncuentrosPorRonda = $listaParticipantes->count()/2;
@@ -50,7 +49,7 @@ class FixtureController extends FOSRestController{
                     throw $this->createNotFoundException('No se pudo generar el Fixture. La disponibilidad total de sedes no es suficiente.');
                 }
 
-                //TODO Controlar esto
+
                 $encuentros[$cantidadRondas][$cantidadEncuentrosPorRonda] = new Encuentro();
 
                 $this->generarFixtureNroPar($encuentros, $cantidadRondas,$cantidadEncuentrosPorRonda, $listaParticipantes);
@@ -59,10 +58,10 @@ class FixtureController extends FOSRestController{
             }else{
 
                 //Fixture para cantidad de participantes IMPAR
-                if($listaParticipantes->count() >0 && $listaParticipantes->count()%2!=0){
+                if($listaParticipantes->count() >1 && $listaParticipantes->count()%2!=0){
 
                     $disponibilidadTotal = $this->calcularDisponibilidadTotal($sedes);
-                    $cantidadEncuentrosPorRonda = $listaParticipantes->count()/2;
+                    $cantidadEncuentrosPorRonda = floor($listaParticipantes->count()/2);
                     $cantidadRondas = $listaParticipantes->count();
 
                     if($cantidadRondas*$cantidadEncuentrosPorRonda > $disponibilidadTotal){
@@ -70,7 +69,7 @@ class FixtureController extends FOSRestController{
                         throw $this->createNotFoundException('No se pudo generar el Fixture. La disponibilidad total de sedes no es suficiente.');
                     }
 
-                    //TODO Controlar esto
+
                     $encuentros[$cantidadRondas][$cantidadEncuentrosPorRonda] = new Encuentro();
 
                     $this->generarFixtureNroImpar($encuentros, $cantidadRondas,$cantidadEncuentrosPorRonda, $listaParticipantes);
@@ -78,7 +77,7 @@ class FixtureController extends FOSRestController{
                 }else{
 
                     //No hay participantes
-                    throw $this->createNotFoundException('No se pudo generar el Fixture. La competencia no posee partipantes');
+                    throw $this->createNotFoundException('No se pudo generar el Fixture. La competencia requiere de al menos 2 participantes registrados');
 
                 }
 
@@ -89,6 +88,7 @@ class FixtureController extends FOSRestController{
             $fixture = $this->armadoFixture($encuentros, $sedes, $cantidadRondas, $cantidadEncuentrosPorRonda);
 
             $competencia->setFixtureId($fixture);
+            $competencia->setEstadoCompetenciaId($em->getReference(EstadoCompetencia::class,EstadoCompetencia::PLANIFICADA));
 
             $fixtureRepository->persistAndFlush($fixture);
 
@@ -119,9 +119,12 @@ class FixtureController extends FOSRestController{
     /**
      * Recibe una matriz de Encuentro y la completa
      * @param $encuentros
+     * @param $cantidadRondas
+     * @param $cantidadEncuentrosPorRonda
+     * @param $listaParticipantes
      * @return void
      */
-    private function generarFixtureNroPar($encuentros, $cantidadRondas,$cantidadEncuentrosPorRonda, ArrayCollection $listaParticipantes){
+    private function generarFixtureNroPar(&$encuentros, $cantidadRondas,$cantidadEncuentrosPorRonda, $listaParticipantes){
 
         for($i=0, $k=0; $i<$cantidadRondas; $i++){
             for ($j=0; $j<$cantidadEncuentrosPorRonda; $j++){
@@ -161,9 +164,12 @@ class FixtureController extends FOSRestController{
     /**
      * Recibe una matriz de Encuentro y la completa
      * @param $encuentros
+     * @param $cantidadRondas
+     * @param $cantidadEncuentrosPorRonda
+     * @param $listaParticipantes
      * @return void
      */
-    private function generarFixtureNroImpar($encuentros, $cantidadRondas, $cantidadEncuentrosPorRonda, ArrayCollection $listaParticipantes){
+    private function generarFixtureNroImpar(&$encuentros, $cantidadRondas, $cantidadEncuentrosPorRonda, $listaParticipantes){
 
         for ($i=0, $k=0; $i<$cantidadRondas; $i++){
 
@@ -201,50 +207,54 @@ class FixtureController extends FOSRestController{
     /**
      * Recibe una matriz de Encuentro y la completa
      * @param $encuentros
+     * @param $sedes
+     * @param $cantidadRondas
+     * @param $cantidadEncuentrosPorRonda
      * @return Fixture
      */
-    private function armadoFixture($encuentros, ArrayCollection $sedes, $cantidadRondas, $cantidadEncuentrosPorRonda){
+    private function armadoFixture($encuentros, $sedes, $cantidadRondas, $cantidadEncuentrosPorRonda){
 
         $disponibilidad=0;
+        $siguienteSede = 0;
 
         $fixture = new Fixture();
 
-        $fecha = $this->calcularFecha();
 
         for ($i=0; $i<$cantidadRondas; $i++){
 
             $ronda = new Ronda();
             $ronda->setNumero($i);
-            $ronda->setFecha($fecha);
 
             for($j=0; $j<$cantidadEncuentrosPorRonda; $j++){
 
                 if($disponibilidad==0){
-                    $sede = $sedes->get(0); //Obtengo el primero
+
+                    $sede = $sedes->get($siguienteSede); //Obtengo la proxima sede a asignar
                     $disponibilidad=$sede->getDisponibilidad();
-                    //TODO Revisar esto por las dudas
-                    $sedes->remove(0);
+                    //$sedes->remove(0);
+                    $siguienteSede++;
                 }
 
-                $encuentros[$i][$j]->setSedesId($sede);
+                $encuentros[$i][$j]->setSedesId($sede->getSedesId());
+                $encuentros[$i][$j]->setRondaId($ronda);
+
                 $disponibilidad--;
 
                 $ronda->getListaEncuentros()->add($encuentros[$i][$j]);
 
             }
 
-            $fecha= $this->calcularFecha();
+            //$fecha= $this->calcularFecha();
 
             $fixture->getListaRondas()->add($ronda);
+            $ronda->setFixtureId($fixture);
+
         }
 
         return $fixture;
 
     }
 
-    private function calcularFecha(){
-        //TODO Implementar Método
-    }
 
 
     /**
@@ -252,39 +262,68 @@ class FixtureController extends FOSRestController{
      *
      * Retorna la lista de los próximos eventos. Para el CU20, solo considerar el campo count.
      *
-     * @param
-     * @return
+     * @param Competencia $competencia
+     * @return int
      * @View()
-     * @throws
      */
-    public function getProximosEncuentros(Competencia $competencia){
-
-        //TODO Implementar
+    public function getproximosencuentrosAction(Competencia $competencia){
 
         /*
          * La lógica a realizar es la siguiente:
          *  -Busco la ultima ronda que está en disputa actualmente (con los encuenntros)
-         *  Lo hago revisando el campo de resultados o la fecha actual.
+         *  Lo hago revisando el campo de resultados.
          *
          * - En base a eso, retorno uno de los siguientes resultados posibles:
          *      -Cantidad de encuentros pendientes para la ronda actualmente en disputa
          *      -Cantidad de encuentros de la proxima ronda si la actual ya ha finalizado sus encuentros
          * */
-        /*
-         *
-         *
-         *
-         * $em = $this->getDoctrine()->getManager();
 
-        $fixtureRepository = $em->getRepository(Fixture::class);
+        $listaRondas = $competencia->getFixtureId()->getListaRondas();
 
-        $listaProximosEncuentros = $em->getRepository(Encuentro::class)->
+        if($listaRondas==null || $listaRondas->isEmpty()){
+            throw $this->createNotFoundException('No hay Fixture un generado para la competencia.');
+        }
 
-        return [
-            'proximosEventos' => ,
-            'count' => ,
-        ];*/
+        $i=0; //Itera sobre la lista de rondas
+        $encontrado = false;
+        $nroRondaPendiente=0;
+        $nroEncuentro = 0;
 
+        while($i<$listaRondas->count() && !$encontrado){
+
+            $j=0; //Itera sobre lista de encuentros de la ronda i
+            $listaEncuentros = $listaRondas->get($i)->getListaEncuentros();
+
+            //Busco el encuentro que no tenga un resultado cargado
+            while($j<$listaEncuentros->count() && !$encontrado){
+
+                if($listaEncuentros->get($j)->getListaResultados()==null ||
+                    $listaEncuentros->get($j)->getListaResultados()->isEmpty()){
+                    $nroRondaPendiente=$i;
+                    $nroEncuentro=$j;
+                    $encontrado=true;
+                }
+
+                $j++;
+
+            }
+
+            $i++;
+
+        }
+
+        return $listaRondas->get($nroRondaPendiente)->getListaEncuentros()->count() - $nroEncuentro;
+
+    }
+
+    /**
+     * @param Fixture $fixture
+     * @return Fixture
+     * @View()
+     */
+    public function getAction(Fixture $fixture){
+
+        return $fixture;
     }
 
 }

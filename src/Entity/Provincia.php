@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Provincia
@@ -29,11 +31,23 @@ class Provincia
     private $nombre;
 
     /**
-     * @var int
+     * @var Pais
      *
-     * @ORM\Column(name="pais_id", type="integer", nullable=false)
+     *
+     * @ORM\ManyToOne(targetEntity="Pais", inversedBy= "listaProvincias")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pais_id", referencedColumnName="id", nullable=false)
+     * })
+     * @Exclude()
      */
     private $paisId;
 
+    /**
+     *  @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Localidad", mappedBy="provinciaId", cascade={"persist", "remove"})
+     *
+     */
+    private $listaLocalidades;
 
 }

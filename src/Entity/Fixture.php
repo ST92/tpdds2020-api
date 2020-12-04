@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Fixture
@@ -26,7 +27,7 @@ class Fixture
      * @var Competencia
      *
      * @ORM\OneToOne(targetEntity="Competencia", mappedBy="fixtureId")
-     *
+     * @Exclude()
      */
     private $competencia;
 
@@ -37,11 +38,22 @@ class Fixture
      */
     private $listaRondas;
 
-    //TODO Falta la asociación con lista de ronda para perdedores
+    /**
+     *  @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Ronda", mappedBy="fixturePerdedoresId", cascade={"persist", "remove"})
+     *
+     */
+    private $listaRondasPerdedores;
+
+
+
+
+
 
     /**
      * Fixture constructor.
-     * @param ArrayCollection $listaRondas
+     *
      */
     public function __construct()
     {
@@ -51,7 +63,7 @@ class Fixture
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -59,7 +71,7 @@ class Fixture
     /**
      * @param int $id
      */
-    public function setId(int $id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -67,7 +79,7 @@ class Fixture
     /**
      * @return Competencia
      */
-    public function getCompetencia(): Competencia
+    public function getCompetencia()
     {
         return $this->competencia;
     }
@@ -75,7 +87,7 @@ class Fixture
     /**
      * @param Competencia $competencia
      */
-    public function setCompetencia(Competencia $competencia): void
+    public function setCompetencia(Competencia $competencia)
     {
         $this->competencia = $competencia;
     }
@@ -83,7 +95,7 @@ class Fixture
     /**
      * @return ArrayCollection
      */
-    public function getListaRondas(): ArrayCollection
+    public function getListaRondas()
     {
         return $this->listaRondas;
     }
@@ -91,10 +103,11 @@ class Fixture
     /**
      * @param ArrayCollection $listaRondas
      */
-    public function setListaRondas(ArrayCollection $listaRondas): void
+    public function setListaRondas(ArrayCollection $listaRondas)
     {
         $this->listaRondas = $listaRondas;
     }
+
 
 
 

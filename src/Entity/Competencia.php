@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use JMS\Serializer\Annotation\Exclude;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
@@ -96,7 +96,8 @@ class Competencia
      *
      * @ORM\Column(name="fecha_baja", type="date", nullable=true)
      *
-     * TODO Consultar si esto es interno o no al sistema.
+     * @Exclude()
+     *
      */
     private $fechaBaja;
 
@@ -149,6 +150,8 @@ class Competencia
      *   @ORM\JoinColumn(name="fixture_id", referencedColumnName="id", nullable=true)
      * })
      *
+     * @Exclude()
+     *
      */
     private $fixtureId;
 
@@ -159,6 +162,7 @@ class Competencia
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id", nullable=false)
      * })
+     * @Exclude()
      */
     private $usuarioId;
 
@@ -166,6 +170,7 @@ class Competencia
      *  @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="SedesCompetencia", mappedBy="competenciaId", cascade={"persist", "remove"})
+     * @Exclude()
      */
     private $listaSedesCompetencia;
 
@@ -174,6 +179,9 @@ class Competencia
      *  @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Participante", mappedBy="competenciaId", cascade={"persist", "remove"})
+     *
+     * @Exclude()
+     *
      */
     private $listaParticipantes;
 
@@ -431,7 +439,7 @@ class Competencia
     }
 
     /**
-     * @param $listaSedesCompetencia
+     * @param ArrayCollection $listaSedesCompetencia
      */
     public function setListaSedesCompetencia($listaSedesCompetencia)
     {

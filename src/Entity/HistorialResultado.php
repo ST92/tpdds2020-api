@@ -4,6 +4,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Resultado
@@ -43,6 +44,7 @@ class HistorialResultado{
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="historial_encuentro_id", referencedColumnName="id", nullable=false)
      * })
+     * @Exclude()
      */
     private $historialEncuentroId;
 

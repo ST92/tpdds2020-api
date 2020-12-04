@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Finder\Tests\Comparator\ComparatorTest;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Participante
@@ -14,8 +15,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @UniqueEntity(
  *     fields={"nombre"},
- *     message="El nombre de participante ya existe"
+ *     message="El nombre de participante ingresado ya existe."
  * )
+ * @UniqueEntity(fields="email", message="El email ingresado ya está asociado a otro participante.")
  */
 class Participante
 {
@@ -50,12 +52,12 @@ class Participante
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="competencia_id", referencedColumnName="id", nullable=false)
      * })
+     * @Exclude()
      */
-
     private $competenciaId;
 
     /**
-     * @return
+     * @return int
      */
     public function getId()
     {

@@ -27,6 +27,25 @@ class CompetenciaRepository extends ServiceEntityRepository {
         $em->flush();
     }
 
+
+    /**
+     * @param $nombre
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneByNombre($nombre)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                "SELECT c FROM App:Competencia c WHERE c.nombre = :nombre "
+            );
+        $query->setParameters(['nombre' => $nombre]);
+
+        return $query->getOneOrNullResult();
+    }
+
+
+
     /**
      * Busca los registros para la grilla
      *
@@ -53,18 +72,23 @@ class CompetenciaRepository extends ServiceEntityRepository {
                 case 'nombre';
                     HelperFilter::makeString('c', $campo, $valor, $operators, $filterArray, $paramsArray);
                     break;
-                case 'estadoCompetenciaId.id';
-                    $joinWithArray[] = 'JOIN c.estadoCompetenciaId ec ';
-                    HelperFilter::makeOperatorIn('ec', 'id', 'estado', $valor, $operators, $filterArray, $paramsArray);
+                case 'deporteId';
+                    $joinWithArray[] = 'JOIN c.deporteId d ';
+                    HelperFilter::makeId('d', 'id', $valor, $operators, $filterArray, $paramsArray);
                     break;
-                case 'usuarioId.id';
-                    $joinWithArray[] = 'JOIN c.usuarioId u ';
-                    HelperFilter::makeId('u', 'id', $valor, $operators, $filterArray, $paramsArray);
-                    break;
-                case 'tipoCompetenciaId.id';
+                case 'tipoCompetenciaId';
                     $joinWithArray[] = 'JOIN c.tipoCompetenciaId tc ';
                     HelperFilter::makeId('tc', 'id', $valor, $operators, $filterArray, $paramsArray);
                     break;
+                case 'estadoCompetenciaId';
+                    $joinWithArray[] = 'JOIN c.estadoCompetenciaId ec ';
+                    HelperFilter::makeId('ec', 'id', $valor, $operators, $filterArray, $paramsArray);
+                    break;
+                case 'usuarioId';
+                    $joinWithArray[] = 'JOIN c.usuarioId u ';
+                    HelperFilter::makeId('u', 'id', $valor, $operators, $filterArray, $paramsArray);
+                    break;
+
             }
         }
 
@@ -73,10 +97,22 @@ class CompetenciaRepository extends ServiceEntityRepository {
         foreach ($order_by as $campo => $direccion) {
             switch ($campo) {
                 case 'id';
-                    $orderByArray[] = 'e.id ' . $direccion;
+                    $orderByArray[] = 'c.id ' . $direccion;
                     break;
                 case 'nombre';
-                    $orderByArray[] = 'e.nombre ' . $direccion;
+                    $orderByArray[] = 'c.nombre ' . $direccion;
+                    break;
+                case 'deporteId.id';
+                    if (!in_array('JOIN c.deporteId d ', $joinWithArray)) {
+                        $joinWithArray[] = 'JOIN c.deporteId d ';
+                    }
+                    $orderByArray[] = 'd.id ' . $direccion;
+                    break;
+                case 'tipoCompetenciaId.id';
+                    if (!in_array('JOIN c.tipoCompetenciaId tc ', $joinWithArray)) {
+                        $joinWithArray[] = 'JOIN c.tipoCompetenciaId tc ';
+                    }
+                    $orderByArray[] = 'tc.id ' . $direccion;
                     break;
                 case 'estadoCompetenciaId.id';
                     if (!in_array('JOIN c.estadoCompetenciaId ec ', $joinWithArray)) {
@@ -89,12 +125,6 @@ class CompetenciaRepository extends ServiceEntityRepository {
                         $joinWithArray[] = 'JOIN c.usuarioId u ';
                     }
                     $orderByArray[] = 'u.id ' . $direccion;
-                    break;
-                case 'tipoCompetenciaId.id';
-                    if (!in_array('JOIN c.tipoCompetenciaId tc ', $joinWithArray)) {
-                        $joinWithArray[] = 'JOIN c.tipoCompetenciaId tc ';
-                    }
-                    $orderByArray[] = 'tc.id ' . $direccion;
                     break;
             }
         }
@@ -125,79 +155,4 @@ class CompetenciaRepository extends ServiceEntityRepository {
         return $query->getResult();
     }
 
-    /**
-     * Cuenta la cantidad de registros según el filtro
-     *
-     * @param $filters
-     * @param $operators
-     *
-     * @return integer
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function countByGrid($filters, $operators)
-    {
-        // armo los filtros
-        $filterArray = [];
-        $paramsArray = [];
-        $joinWithArray = [];
-
-        foreach ($filters as $campo => $valor) {
-            switch ($campo) {
-                case 'id';
-                    HelperFilter::makeNumeric('c', $campo, $valor, $operators, $filterArray, $paramsArray);
-                    break;
-                case 'nombre';
-                    HelperFilter::makeString('c', $campo, $valor, $operators, $filterArray, $paramsArray);
-                    break;
-                case 'estadoCompetenciaId.id';
-                    $joinWithArray[] = 'JOIN c.estadoCompetenciaId ec ';
-                    HelperFilter::makeOperatorIn('ec', 'id', 'estado', $valor, $operators, $filterArray, $paramsArray);
-                    break;
-                case 'usuarioId.id';
-                    $joinWithArray[] = 'JOIN c.usuarioId u ';
-                    HelperFilter::makeId('u', 'id', $valor, $operators, $filterArray, $paramsArray);
-                    break;
-                case 'tipoCompetenciaId.id';
-                    $joinWithArray[] = 'JOIN c.tipoCompetenciaId tc ';
-                    HelperFilter::makeId('tc', 'id', $valor, $operators, $filterArray, $paramsArray);
-                    break;
-            }
-        }
-
-        $where = '';
-        if (!empty($filterArray)) {
-            $where = 'WHERE ' . implode(' AND ', $filterArray);
-        }
-
-        $joinWithStr = '';
-        if (!empty($joinWithArray)) {
-            $joinWithStr = '' . implode(' ', $joinWithArray);
-        }
-
-        $query = $this->getEntityManager()
-            ->createQuery(
-                "SELECT COUNT(c.id) FROM App:Competencia c $joinWithStr $where "
-            )
-            ->setParameters($paramsArray);
-
-        return $query->getSingleScalarResult();
-    }
-
-
-    /**
-     * @param $nombre
-     * @return mixed
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function findOneByNombre($nombre)
-    {
-        $query = $this->getEntityManager()
-            ->createQuery(
-                "SELECT c FROM App:Competencia c WHERE c.nombre = :nombre "
-            );
-        $query->setParameters(['nombre' => $nombre]);
-
-        return $query->getOneOrNullResult();
-    }
 }

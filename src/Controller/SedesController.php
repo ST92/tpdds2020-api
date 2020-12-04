@@ -48,7 +48,7 @@ class SedesController extends FOSRestController
      *
      *
      */
-    public function cgetAction(ParamFetcherInterface $paramFetcher)
+    private function cgetAction(ParamFetcherInterface $paramFetcher)
     {
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
@@ -92,5 +92,21 @@ class SedesController extends FOSRestController
         return $sedes;
     }
 
+    /**
+     * Devuelve una sede específica
+     *
+     * @param $idUsuario
+     * @param $idDeporte
+     * @return array
+     *
+     * @View()
+     */
+    public function getSedespordeporteAction($idUsuario, $idDeporte){
 
+        $em = $this->getDoctrine()->getManager();
+
+        return [
+            'sedes' => $em->getRepository(Sedes::class)->findSedesPorDeporte($idUsuario, $idDeporte),
+        ];
+    }
 }

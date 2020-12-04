@@ -82,9 +82,8 @@ class ParticipanteController extends FOSRestController{
 
             if($estadoCompetencia->getId()==EstadoCompetencia::CREADA || $estadoCompetencia->getId()==EstadoCompetencia::PLANIFICADA){
 
+                $participante->getCompetenciaId()->setEstadoCompetenciaId($em->getReference(EstadoCompetencia::class,EstadoCompetencia::CREADA));
                 $participanteRepository->persistAndFlush($participante);
-
-                //TODO Agregar acá validación por email existente. y lo de nombre
 
                 return $participante;
 

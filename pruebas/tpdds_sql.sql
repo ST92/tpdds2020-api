@@ -17,9 +17,10 @@ INSERT INTO tipopuntuacion (id, nombre) VALUES (1, 'SETS');
 INSERT INTO tipopuntuacion (id, nombre) VALUES (2, 'PUNTUACION');
 INSERT INTO tipopuntuacion (id, nombre) VALUES (3, 'RESULTADO_FINAL');
 
-INSERT INTO deporte (id, nombre) VALUES (1, 'football');
+INSERT INTO deporte (id, nombre) VALUES (1, 'fútbol');
 INSERT INTO deporte (id, nombre) VALUES (2, 'basquet');
 INSERT INTO deporte (id, nombre) VALUES (3, 'tenis');
+INSERT INTO deporte (id, nombre) VALUES (4, 'rugby');
 
 INSERT INTO sedes (id, codigo, nombre, descripcion, usuario_id, fecha_borrado) 
 	VALUES (1, 1, 'Rafael Osinalde', 'Cancha de futball', 1,null);
@@ -45,4 +46,14 @@ INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (4, 1);
 
 INSERT INTO estadocompetencia (id,nombre)
 	VALUES(1,'CREADA')
-	
+INSERT INTO estadocompetencia (id,nombre)
+	VALUES(2,'PLANIFICADA')
+
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (1, 0, 2, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (2, 3, 0, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (3, 0, 0, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (4, 1, 1, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (5, 0, 1, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (6, 1, 3, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (7, 2, 1, 0);
+INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (8, 3, 0, 0);
