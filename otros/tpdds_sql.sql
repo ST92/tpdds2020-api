@@ -17,19 +17,19 @@ INSERT INTO tipopuntuacion (id, nombre) VALUES (1, 'SETS');
 INSERT INTO tipopuntuacion (id, nombre) VALUES (2, 'PUNTUACION');
 INSERT INTO tipopuntuacion (id, nombre) VALUES (3, 'RESULTADO_FINAL');
 
-INSERT INTO deporte (id, nombre) VALUES (1, 'fútbol');
-INSERT INTO deporte (id, nombre) VALUES (2, 'basquet');
-INSERT INTO deporte (id, nombre) VALUES (3, 'tenis');
-INSERT INTO deporte (id, nombre) VALUES (4, 'rugby');
+INSERT INTO deporte (id, nombre) VALUES (1, 'Fútbol');
+INSERT INTO deporte (id, nombre) VALUES (2, 'Basquet');
+INSERT INTO deporte (id, nombre) VALUES (3, 'Tenis');
+INSERT INTO deporte (id, nombre) VALUES (4, 'Rugby');
 
 INSERT INTO sedes (id, codigo, nombre, descripcion, usuario_id, fecha_borrado) 
-	VALUES (1, 1, 'Rafael Osinalde', 'Cancha de futball', 1,null);
+	VALUES (1, 1, 'Rafael Osinalde', 'Cancha de Fútbol', 1,null);
 INSERT INTO sedes (id, codigo, nombre, descripcion, usuario_id, fecha_borrado)
-	VALUES (2, 2, 'Gregorio Panizza', 'Cancha de basquet', 1,null);
+	VALUES (2, 2, 'Gregorio Panizza', 'Cancha de Basquet', 1,null);
 INSERT INTO sedes (id, codigo, nombre, descripcion, usuario_id, fecha_borrado)
-	VALUES (3, 3, 'Club Talense', 'Cancha de tenis', 1,null);
+	VALUES (3, 3, 'Club Talense', 'Cancha de Tenis', 1,null);
 INSERT INTO sedes (id, codigo, nombre, descripcion, usuario_id, fecha_borrado) 
-	VALUES (4, 4, '2 de Enero', 'Cancha de futball', 1,null);
+	VALUES (4, 4, '2 de Enero', 'Cancha de Fútbol', 1,null);
 
 INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (1, 1);
 INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (1, 2);
@@ -43,11 +43,17 @@ INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (3, 3);
 INSERT INTO sedes_deporte(sedes_id, deporte_id) VALUES (4, 1);
 
 
-
 INSERT INTO estadocompetencia (id,nombre)
 	VALUES(1,'CREADA')
 INSERT INTO estadocompetencia (id,nombre)
 	VALUES(2,'PLANIFICADA')
+INSERT INTO estadocompetencia (id, nombre)
+    VALUES (3, 'EN_DISPUTA')
+INSERT INTO estadocompetencia (id, nombre)
+    VALUES (4, 'FINALIZADA'),
+INSERT INTO estadocompetencia (id, nombre)
+    VALUES (5, 'ELIMINADA');
+
 
 INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (1, 0, 2, 0);
 INSERT INTO resultado(id, puntos_participante_1, puntos_participante_2, encuentro_id) VALUES (2, 3, 0, 0);

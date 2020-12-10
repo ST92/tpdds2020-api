@@ -26,14 +26,14 @@ class HistorialResultado{
     /**
      * @var int
      *
-     * @ORM\Column(name="puntosparticipante1", type="date", nullable=false)
+     * @ORM\Column(name="puntosparticipante1", type="integer", nullable=false)
      */
     private $puntosParticipante1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="puntosparticipante2", type="date", nullable=false)
+     * @ORM\Column(name="puntosparticipante2", type="integer", nullable=false)
      */
     private $puntosParticipante2;
 
