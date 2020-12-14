@@ -167,7 +167,7 @@ class CompetenciaType extends AbstractType{
 
                         case TipoPuntuacion::SETS:
 
-                            if ($data->getCantidadSets()==null || $data->getCantidadSets()%2 ==1 || $data->getCantidadSets() > 10) {
+                            if ($data->getCantidadSets()==null || $data->getCantidadSets()%2 !=1 || $data->getCantidadSets() > 10) {
                                 $context->buildViolation('Cantidad de Sets debe ser un número impar, mayor a 0 y menor a 10')
                                     ->atPath('cantidadSets')
                                     ->addViolation();
