@@ -32,7 +32,18 @@ class FixtureController extends FOSRestController{
         $em = $this->getDoctrine()->getManager();
         $fixtureRepository = $em->getRepository(Fixture::class);
 
+
         if($competencia!=null){
+
+            if(!($competencia->getEstadoCompetenciaId()->getId()==EstadoCompetencia::CREADA ||$competencia->getEstadoCompetenciaId()->getId()==EstadoCompetencia::PLANIFICADA)){
+                throw $this->createNotFoundException('No se pudo generar el Fixture. La competencia se encuentra en disputa o ha terminado.');
+            }
+
+            //Elimina el Fixture anterior.
+            if($competencia->getFixtureId()!=null){
+                $em->getRepository(Fixture::class)->remove($competencia->getFixtureId());
+                $competencia->setFixtureId(null);
+            }
 
             $listaParticipantes = $competencia->getListaParticipantes();
             $sedes = $competencia->getListaSedesCompetencia();
@@ -268,7 +279,10 @@ class FixtureController extends FOSRestController{
      */
     public function getproximosencuentrosAction(Competencia $competencia){
 
+
         /*
+         * Sólo si la competencia está planificada o en disputa
+         *
          * La lógica a realizar es la siguiente:
          *  -Busco la ultima ronda que está en disputa actualmente (con los encuenntros)
          *  Lo hago revisando el campo de resultados.
@@ -278,10 +292,15 @@ class FixtureController extends FOSRestController{
          *      -Cantidad de encuentros de la proxima ronda si la actual ya ha finalizado sus encuentros
          * */
 
+
+        if(!($competencia->getEstadoCompetenciaId()->getId()==EstadoCompetencia::PLANIFICADA || $competencia->getEstadoCompetenciaId()->getId()==EstadoCompetencia::EN_DISPUTA)){
+            return 0;
+        }
+
         $listaRondas = $competencia->getFixtureId()->getListaRondas();
 
         if($listaRondas==null || $listaRondas->isEmpty()){
-            throw $this->createNotFoundException('No hay Fixture un generado para la competencia.');
+            return 0;
         }
 
         $i=0; //Itera sobre la lista de rondas

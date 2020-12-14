@@ -407,9 +407,9 @@ class Competencia
     }
 
     /**
-     * @param Fixture $fixtureId
+     * @param $fixtureId
      */
-    public function setFixtureId(Fixture $fixtureId)
+    public function setFixtureId($fixtureId)
     {
         $this->fixtureId = $fixtureId;
     }

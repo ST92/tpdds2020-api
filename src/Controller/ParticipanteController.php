@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Competencia;
 use App\Entity\EstadoCompetencia;
+use App\Entity\Fixture;
 use App\Entity\Participante;
 use App\Form\CompetenciaType;
 use App\Form\ParticipanteType;
@@ -79,9 +80,17 @@ class ParticipanteController extends FOSRestController{
         if ($objForm->isSubmitted() && $objForm->isValid()) {
 
             $estadoCompetencia = $participante->getCompetenciaId()->getEstadoCompetenciaId();
+            $competencia = $participante->getCompetenciaId();
 
             if($estadoCompetencia->getId()==EstadoCompetencia::CREADA || $estadoCompetencia->getId()==EstadoCompetencia::PLANIFICADA){
 
+                //Elimino el fixture
+                if($competencia->getFixtureId()!=null){
+                    $em->getRepository(Fixture::class)->remove($competencia->getFixtureId());
+                    $competencia->setFixtureId(null); //Esta línea evita errores.
+                }
+
+                //Vuelvo la competencia a estado CREADA.
                 $participante->getCompetenciaId()->setEstadoCompetenciaId($em->getReference(EstadoCompetencia::class,EstadoCompetencia::CREADA));
                 $participanteRepository->persistAndFlush($participante);
 
@@ -89,7 +98,7 @@ class ParticipanteController extends FOSRestController{
 
             }
 
-            throw $this->createNotFoundException('No se pudo dar de alta al participante. La competencia ha finalidado o ya está en disputa'); //TODO Ver esto. Diagrama de secuencias arroja excepción
+            throw $this->createNotFoundException('No se pudo dar de alta al participante. La competencia ha finalidado o ya está en disputa');
 
         }
 

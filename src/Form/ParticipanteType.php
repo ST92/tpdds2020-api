@@ -50,6 +50,14 @@ class ParticipanteType extends AbstractType{
                             ->addViolation();
 
                     }
+
+                    if($data->getNombre()==null || $data->getNombre()==""){
+                        $context->buildViolation('El nombre ingresado no posee una estructura válida. Ingrese de nuevo el nombre.')
+                            ->atPath('nombre')
+                            ->addViolation();
+                    }
+
+
                 })]
         ])
             ->setRequired('em');

@@ -21,4 +21,11 @@ class FixtureRepository extends ServiceEntityRepository {
         $em->flush();
     }
 
+    public function remove($fixture){
+
+        $em = $this->getEntityManager();
+        $em->remove($fixture);
+
+    }
+
 }
